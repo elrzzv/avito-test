@@ -15,7 +15,7 @@ const sampleAds = [
     category: 'Электроника',
     title: 'Наушники',
     price: '2990 ₽',
-    image: 'https://via.placeholder.com/200x150?text=Image',
+    image: '/placeholder-image.png',
     needsWork: false,
   },
   {
@@ -23,7 +23,7 @@ const sampleAds = [
     category: 'Авто',
     title: 'Volkswagen Polo',
     price: '1 100 000 ₽',
-    image: 'https://via.placeholder.com/200x150?text=Image',
+    image: '/placeholder-image.png',
     needsWork: true,
   },
 ];

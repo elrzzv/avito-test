@@ -7,23 +7,33 @@ export type AdCardProps = {
   category: string;
   title: string;
   price: string;
-  image: string;
+  image?: string;
   needsWork?: boolean;
 }
 
-export default function AdCard({ id, category, title, price, image, needsWork }: AdCardProps): JSX.Element {
+const placeholder_image = '/placeholder-image.png';
+
+export default function AdCard({ id, category, title, price, 
+  needsWork, image = placeholder_image }: AdCardProps): JSX.Element {
   return (
-    <Card 
-      className="ad-card"
-      hoverable
-      cover={<img alt={title} src={image} className="ad-image" />}
-    >
+    <div className="ad-card-wrapper">
+      <Card 
+        className="ad-card"
+        hoverable
+        cover={<img alt={title} src={image} className="ad-image" />}
+      >
+        <div className="ad-content">
+          <h3 className="ad-title">{title}</h3>
+          <div className="ad-price">{price}</div>
+          {needsWork && (
+            <div className="ad-badge">
+              <span className="badge-dot"></span>
+              <span>Требует доработок</span>
+            </div>
+          )}
+        </div>
+      </Card>
       <div className="ad-category">{category}</div>
-      <h3 className="ad-title">{title}</h3>
-      <div className="ad-price">{price}</div>
-      {needsWork && (
-        <div className="ad-badge">Требует доработок</div>
-      )}
-    </Card>
+    </div>
   );
 }

@@ -16,7 +16,7 @@ export default function AdsPageHeader(): JSX.Element {
       <div className="search-section">
         <Input 
           placeholder="Найти объявление..." 
-          prefix={<SearchOutlined />}
+          suffix={<SearchOutlined />}
           className="search-input"
         />
         <div className="view-toggle">
