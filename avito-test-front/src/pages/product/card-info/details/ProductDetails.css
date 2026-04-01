@@ -1,0 +1,137 @@
+.product-details {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: 100%;
+  text-align: left;
+}
+
+.warning-alert {
+  border-radius: 8px;
+  padding: 16px;
+  flex-shrink: 0;
+  background-color: #F9F1E6;
+  border: none;
+  margin-bottom: 0;
+  width: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); 
+}
+
+.warning-alert .ant-alert-message {
+  font-weight: bold !important;
+  color: #000000;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.warning-alert .ant-alert-description {
+  color: #000000;
+  font-size: 13px;
+  margin-top: 0;
+  line-height: 1.5;
+}
+
+.warning-alert .ant-alert-icon {
+  color: #FFA940;
+  font-size: 16px;
+}
+
+.warning-description {
+  margin: 0;
+}
+
+.warning-list {
+  margin: 4px 0 0 0;
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+.warning-list li {
+  margin: 2px 0;
+  color: #000000;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.characteristics-section {
+  flex: 1;
+  text-align: left;
+}
+
+.characteristics-title {
+  margin-bottom: 16px !important;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 18px !important;
+  text-align: left;
+}
+
+.characteristics-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.characteristic-item {
+  display: flex;
+  gap: 80px;
+  padding: 0;
+  border-bottom: none;
+  line-height: 1.5;
+}
+
+.characteristic-label {
+  font-weight: 600;
+  min-width: 70px;
+  color: #8c8c8c;
+  font-size: 14px;
+}
+
+.characteristic-value {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .product-details {
+    gap: 20px;
+  }
+  
+  .warning-alert {
+    padding: 12px;
+    max-width: 100%;
+  }
+  
+  .warning-alert .ant-alert-message {
+    font-size: 13px;
+  }
+  
+  .warning-alert .ant-alert-description {
+    font-size: 12px;
+  }
+  
+  .warning-list li {
+    font-size: 12px;
+  }
+  
+  .characteristics-title {
+    font-size: 16px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .characteristics-list {
+    gap: 10px;
+  }
+  
+  .characteristic-item {
+    gap: 20px;
+  }
+  
+  .characteristic-label {
+    min-width: 65px;
+    font-size: 13px;
+  }
+  
+  .characteristic-value {
+    font-size: 13px;
+  }
+}

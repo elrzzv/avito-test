@@ -1,0 +1,107 @@
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 32px;
+  background-color: white;
+  border-bottom: 1px solid #e8e8e8;
+  height: 90px;
+  flex-shrink: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  justify-content: center;
+  height: 100%;
+}
+
+.product-title {
+  margin: 0 !important;
+  font-size: 24px !important;
+  font-family: inherit;
+}
+
+.edit-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  height: 100%;
+  padding-top: 8px;
+}
+
+.price-value {
+  margin: 0 0 12px 0 !important;
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  color: #000000;
+  font-family: inherit;
+}
+
+.date-item {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.2;
+}
+
+.date-item:first-of-type {
+  margin-bottom: 4px;
+}
+
+.date-label {
+  font-weight: 400;
+  color: #bfbfbf;
+}
+
+.date-text {
+  font-weight: 400;
+  color: #bfbfbf;
+}
+
+@media (max-width: 768px) {
+  .product-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+    padding: 16px;
+    height: auto;
+    min-height: auto;
+    max-height: none;
+  }
+
+  .header-left {
+    justify-content: flex-start;
+    height: auto;
+  }
+
+  .header-right {
+    align-items: flex-start;
+    height: auto;
+    padding-top: 0;
+  }
+
+  .price-value {
+    margin: 0 0 8px 0 !important;
+  }
+
+  .date-item:first-of-type {
+    margin-bottom: 4px;
+  }
+
+  .date-item {
+    justify-content: space-between;
+    width: 100%;
+  }
+}

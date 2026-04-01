@@ -1,0 +1,50 @@
+.card-info {
+  flex: 1;
+  min-height: 0;
+  background-color: #FFFFFF;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.card-info::-webkit-scrollbar {
+  display: none;
+}
+
+.card-info-grid {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 48px;
+  padding: 32px;
+  min-height: min-content;
+}
+
+.card-info-left,
+.card-info-right {
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1024px) {
+  .card-info-grid {
+    gap: 32px;
+    padding: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-info-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 20px;
+  }
+
+  .card-info-left {
+    order: 1;
+  }
+
+  .card-info-right {
+    order: 2;
+  }
+}
