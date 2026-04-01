@@ -1,9 +1,32 @@
 import type { JSX } from "react";
 import { Helmet } from "react-helmet-async";
-import './AdsPage.css';
 import { Layout } from 'antd';
+import AdsPageHeader from './header/AdsPageHeader';
+import AdsPageSider from './sider/AdsPageSider';
+import AdCards from './cards/AdCards';
+import AdsPageFooter from './footer/AdsPageFooter';
+import './AdsPage.css';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Sider } = Layout;
+
+const sampleAds = [
+  {
+    id: 1,
+    category: 'Электроника',
+    title: 'Наушники',
+    price: '2990 ₽',
+    image: 'https://via.placeholder.com/200x150?text=Image',
+    needsWork: false,
+  },
+  {
+    id: 2,
+    category: 'Авто',
+    title: 'Volkswagen Polo',
+    price: '1 100 000 ₽',
+    image: 'https://via.placeholder.com/200x150?text=Image',
+    needsWork: true,
+  },
+];
 
 export default function AdsPage(): JSX.Element {
   return (
@@ -12,26 +35,20 @@ export default function AdsPage(): JSX.Element {
         <title>Мои объявления - Avito</title>
       </Helmet>
       
-      <Layout className="layout-root">
-        <Header className="layout-header">
-          Header
-        </Header>
-        
-        <Layout>
-          <Sider width="25%" className="layout-sider">
-            Sider Bar
+      <div className="page-container">
+        <AdsPageHeader />
+
+        <Layout className="main-layout">
+          <Sider width={240} className="sider-wrapper" theme="light">
+            <AdsPageSider />
           </Sider>
           
-          <Layout>
-            <Content className="layout-content">
-              Content
-            </Content>
-            <Footer className="layout-footer">
-              Footer
-            </Footer>
+          <Layout className="content-layout">
+            <AdCards ads={sampleAds} />
+            <AdsPageFooter />
           </Layout>
         </Layout>
-      </Layout>
+      </div>
     </>
   );
 }

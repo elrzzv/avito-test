@@ -1,0 +1,77 @@
+.page-header {
+  width: 100%;
+  max-width: 1335px;
+  margin: 0 auto 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.main-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+.ads-count {
+  font-size: 16px;
+  color: #999;
+}
+
+.search-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  box-shadow: none;
+  font-size: 14px;
+}
+
+.search-input:focus {
+  box-shadow: none;
+  border: none;
+}
+
+.view-toggle {
+  display: flex;
+  gap: 8px;
+  padding: 0 12px;
+  border-right: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+}
+
+.view-toggle .icon {
+  font-size: 18px;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.view-toggle .icon.active {
+  color: #4096ff;
+}
+
+.sort-select {
+  min-width: 200px;
+  border: none;
+  box-shadow: none;
+}
+
+.sort-select:focus {
+  box-shadow: none;
+}
