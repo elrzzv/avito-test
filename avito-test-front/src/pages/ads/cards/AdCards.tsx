@@ -5,16 +5,28 @@ import './AdCards.css';
 
 export type AdCardsProps = {
   ads: TItem[];
+  loading: boolean
 }
 
-export default function AdCards({ ads }: AdCardsProps): JSX.Element {
+export default function AdCards({ ads, loading }: AdCardsProps): JSX.Element {
   return (
     <div className="ads-content">
-      <div className="ads-grid">
-        {ads.map((ad) => (
-          <AdCard key={ad.id} ad={ad} />
-        ))}
-      </div>
+      {
+        !loading ? (
+          <div className="ads-grid">
+            {ads.map((ad) => (
+              <AdCard key={ad.id} ad={ad} />
+            ))}
+          </div>
+        ):( 
+          <div className="skeleton-grid">
+            {[...Array(ads.length)].map((_, i) => (
+              <div key={i} className="skeleton-card" />
+            ))}
+          </div>
+        )
+      }
+
     </div>
   );
 }
