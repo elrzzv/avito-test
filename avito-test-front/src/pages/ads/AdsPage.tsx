@@ -7,7 +7,11 @@ import AdsPageHeader from './header/AdsPageHeader';
 import AdsPageSider from './sider/AdsPageSider';
 import AdCards from './cards/AdCards';
 import AdsPageFooter from './footer/AdsPageFooter';
-import { type TItemsListResponseItem as TItem } from "../../types/types"; 
+import { 
+  type TItemsListResponseItem as TItem,
+  type ItemSortColumn as TItemSortColumn,
+  type SortDirection as TSortDirection
+} from "../../types/types"; 
 import './AdsPage.css';
 
 const { Sider } = Layout;
@@ -30,6 +34,11 @@ function calculateItemsPerPage(){
   return [itemsPerRow, rowsToShow];
 }
 
+export interface Tsort {
+  sortColumn: TItemSortColumn;
+  sortDirection: TSortDirection;
+}
+
 export default function AdsPage(): JSX.Element {
 
   const [items, setItems] = useState<TItem[]>([]);
@@ -39,6 +48,7 @@ export default function AdsPage(): JSX.Element {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [needsRevision, setNeedsRevision] = useState<boolean>(false);
   const [search, setSearch] = useState<string>('');
+  const [sort, setSort] = useState<Tsort>({sortColumn: 'createdAt',sortDirection: 'desc'})
 
   const loadProducts = useCallback(async () => {
     setLoading(true);
@@ -46,12 +56,16 @@ export default function AdsPage(): JSX.Element {
       const params = new URLSearchParams();
       params.append('limit', '100');
       params.append('q', search);
+      params.append('sortColumn', sort.sortColumn);
+      params.append('sortDirection', sort.sortDirection);
       if (selectedCategories.length > 0) {
         params.append('categories', selectedCategories.join(','));
       }
       if (needsRevision){
         params.append('needsRevision', 'true')
       }
+
+      console.log(`/api/items?${params.toString()}`);
 
       const response = await axios.get(`/api/items?${params.toString()}`);
       setItems(response.data.items);
@@ -62,11 +76,15 @@ export default function AdsPage(): JSX.Element {
     } finally {
       setLoading(false);
     }
-  }, [selectedCategories, needsRevision, search])
+  }, [selectedCategories, needsRevision, search, sort])
 
   useEffect(() => {
     loadProducts();
   }, [loadProducts]);
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
 
   const handleCategoryChange = (category: string, checked: boolean) => {
     setSelectedCategories(prev => 
@@ -79,7 +97,7 @@ export default function AdsPage(): JSX.Element {
 
   const handleNeedsRevisionChange = (checked: boolean) => {
     setNeedsRevision(checked);
-    setPage(1); // Сбрасываем на первую страницу при изменении фильтра
+    setPage(1);
   };
 
   const handleResetFilters = () => {
@@ -90,6 +108,11 @@ export default function AdsPage(): JSX.Element {
 
   const handleSearch = (searchText: string) => {
     setSearch(searchText);
+  }
+
+  const handleSort = (value: string) => {
+    const [sortColumn, sortDirection] = value.split('-');
+    setSort({ sortColumn, sortDirection } as Tsort);
   }
 
   const [page, setPage] = useState<number>(1);
@@ -108,7 +131,9 @@ export default function AdsPage(): JSX.Element {
       
       <div className="page-container">
         <AdsPageHeader 
-          total={total} search={search} handleSearch={handleSearch}
+          total={total} 
+          search={search} onSearch={handleSearch} 
+          sort={sort} onSort={handleSort}
         />
 
         <Layout className="main-layout">
@@ -127,8 +152,9 @@ export default function AdsPage(): JSX.Element {
               ads={items.slice(startIndex, endIndex)} loading={loading}
             />
 
-            <AdsPageFooter total={total} itemsPerPage={itemsPerPage}
-              page={page} onPageChange={setPage} />
+            <AdsPageFooter 
+              total={total} itemsPerPage={itemsPerPage}
+              page={page} onPageChange={handlePageChange} />
           </Layout>
         </Layout>
       </div>
