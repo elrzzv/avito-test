@@ -65,8 +65,6 @@ export default function AdsPage(): JSX.Element {
         params.append('needsRevision', 'true')
       }
 
-      console.log(`/api/items?${params.toString()}`);
-
       const response = await axios.get(`/api/items?${params.toString()}`);
       setItems(response.data.items);
       setTotal(response.data.total);
