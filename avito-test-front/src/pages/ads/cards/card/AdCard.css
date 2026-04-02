@@ -1,7 +1,7 @@
 .ad-card-wrapper {
   position: relative;
   width: 200px;
-  height: 268px;
+  height: 280px;
 }
 
 .ad-card {
@@ -19,6 +19,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-height: 0;
 }
 
 .ad-image {
@@ -36,10 +37,10 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  min-height: 0;
 }
 
 .ad-title {
-  margin: 0 0 6px 0;
   font-size: 14px;
   font-weight: 400;
   color: #333;
@@ -49,6 +50,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-align: left;
+  flex-shrink: 0;
 }
 
 .ad-price {
@@ -57,6 +59,7 @@
   color: #999;
   margin-bottom: 8px;
   text-align: left;
+  flex-shrink: 0;
 }
 
 .ad-badge {
@@ -73,6 +76,7 @@
   width: fit-content;
   text-align: left;
   margin-top: auto;
+  flex-shrink: 0;
 }
 
 .badge-dot {

@@ -1,4 +1,4 @@
-import type { JSX } from 'react'
+import { type JSX } from 'react'
 import { Routes, Route } from 'react-router'
 import { Paths } from './const'
 

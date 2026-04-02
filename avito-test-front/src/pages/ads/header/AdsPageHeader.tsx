@@ -5,12 +5,33 @@ import './AdsPageHeader.css';
 
 const { Option } = Select;
 
-export default function AdsPageHeader(): JSX.Element {
+interface AdsHeaderProps {
+  total: number;
+}
+
+export default function AdsPageHeader({total}: AdsHeaderProps): JSX.Element {
+
+  const adsCountName = (total: number) => {
+    if (!total)
+      return 'Нет актуальных объявлений';
+    if (total in [11, 12, 13, 14, 15, 16, 17, 18, 19])
+      return `${total} объявлений`;
+    if (total%10 === 1)
+      return `${total} объявление`;
+    if (total%10 in [2, 3, 4])
+      return `${total} объявления`;
+    if (total%10 in [5, 6, 7, 8, 9])
+      return `${total} объявлений`;
+    return '';
+  }
+
   return (
     <div className="page-header">
       <div className="title-section">
         <h1 className="main-title">Мои объявления</h1>
-        <span className="ads-count">42 объявления</span>
+        <span className="ads-count">
+          {adsCountName(total)}
+        </span>
       </div>
       
       <div className="search-section">

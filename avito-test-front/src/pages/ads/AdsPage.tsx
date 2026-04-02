@@ -1,34 +1,32 @@
-import type { JSX } from "react";
+import { useEffect, useState, type JSX } from "react";
+import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import { Layout } from 'antd';
+
 import AdsPageHeader from './header/AdsPageHeader';
 import AdsPageSider from './sider/AdsPageSider';
 import AdCards from './cards/AdCards';
 import AdsPageFooter from './footer/AdsPageFooter';
+import { type TItemsListResponseItem as TItem } from "../../types/types"; 
 import './AdsPage.css';
 
 const { Sider } = Layout;
 
-const sampleAds = [
-  {
-    id: 1,
-    category: 'Электроника',
-    title: 'Наушники',
-    price: '2990 ₽',
-    image: '/placeholder-image.png',
-    needsWork: false,
-  },
-  {
-    id: 2,
-    category: 'Авто',
-    title: 'Volkswagen Polo',
-    price: '1 100 000 ₽',
-    image: '/placeholder-image.png',
-    needsWork: true,
-  },
-];
-
 export default function AdsPage(): JSX.Element {
+
+  const [items, setItems] = useState<TItem[]>([]);
+  const [total, setTotal] = useState<number>(0);
+
+  const loadProducts = async () => {
+    const response = await axios.get('/api/items?limit=100');
+    setItems(response.data.items);
+    setTotal(response.data.total);
+  }
+
+  useEffect(() => {
+    loadProducts();
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -36,7 +34,7 @@ export default function AdsPage(): JSX.Element {
       </Helmet>
       
       <div className="page-container">
-        <AdsPageHeader />
+        <AdsPageHeader total={total}/>
 
         <Layout className="main-layout">
           <Sider width={240} className="sider-wrapper" theme="light">
@@ -44,7 +42,7 @@ export default function AdsPage(): JSX.Element {
           </Sider>
           
           <Layout className="content-layout">
-            <AdCards ads={sampleAds} />
+            <AdCards ads={items} />
             <AdsPageFooter />
           </Layout>
         </Layout>
