@@ -47,3 +47,11 @@ type ElectronicsItemParams = {
 export type ItemSortColumn = Extract<keyof Item, 'title' | 'createdAt'>;
 
 export type SortDirection = 'asc' | 'desc';
+
+export interface TItemsListResponseItem {
+  id: number; 
+  category: Item['category'];
+  title: Item['title'];
+  price: Item['price'];
+  needsRevision: boolean;
+}
