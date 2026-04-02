@@ -31,8 +31,8 @@ export default function AdsPageSider(
           </div>
 
           <div className="filter-options">
-            {categories.map(c => 
-              <label className="checkbox-label">
+            {categories.map((c, i) => 
+              <label key={i} className="checkbox-label">
                 <input 
                   type="checkbox"
                   value={c}
