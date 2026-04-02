@@ -1,0 +1,73 @@
+.description-section {
+  padding-top: 24px;
+  border-top: 2px solid #f0f0f0;
+  text-align: left;
+  width: 100%;
+}
+
+.description-section .ant-form-item {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.edit-page-textarea {
+  width: 100% !important;
+  min-height: 150px;
+  border-radius: 8px;
+  border: 1px solid #d9d9d9;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 12px !important;
+  box-sizing: border-box;
+  transition: all 0.3s;
+}
+
+.edit-page-textarea:hover {
+  border-color: #40a9ff;
+}
+
+.edit-page-textarea:focus {
+  border-color: #1890ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.edit-page-textarea::placeholder {
+  color: #bfbfbf;
+  text-align: left;
+  opacity: 1;
+}
+
+.ant-input-textarea-show-count::after {
+  color: #8c8c8c;
+  font-size: 12px;
+  bottom: 8px;
+  right: 12px;
+}
+
+.ant-input-textarea {
+  width: 100%;
+}
+
+.ant-input-textarea .ant-input {
+  width: 100%;
+  min-height: 150px;
+}
+
+.generate-description-btn {
+  color: #FA8C16;
+  background: #FFF7E6;
+  border: 1px solid #FFD591;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-top: 12px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.generate-description-btn:hover {
+  color: #FA8C16;
+  background: #FFF1D6;
+  border-color: #FFC53D;
+}

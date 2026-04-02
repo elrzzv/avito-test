@@ -1,0 +1,68 @@
+.price-wrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.price-form-item {
+  flex: 1;
+  max-width: 500px;
+  margin-bottom: 0 !important;
+}
+
+.ai-price-btn {
+  background-color: #F9F1E6;
+  color: #FFA940;
+  border: 1px solid #FFD591;
+  border-radius: 8px;
+  height: 44px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.ai-price-btn:hover {
+  background-color: #FFF7E6;
+  color: #FFA940;
+  border-color: #FFC53D;
+  transform: translateY(-1px);
+}
+
+.ai-price-btn:active {
+  transform: translateY(0);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .price-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .price-form-item {
+    max-width: 100%;
+  }
+
+  .ai-price-btn {
+    width: 100%;
+    white-space: normal;
+  }
+}
