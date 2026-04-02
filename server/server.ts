@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import Fastify from 'fastify';
 
 import items from 'data/items.json' with { type: 'json' };
@@ -164,6 +165,7 @@ fastify.put<ItemUpdateRequest>('/items/:id', (request, reply) => {
 });
 
 const port = Number(process.env.port) ?? 8080;
+console.log('PORT:', port);
 
 fastify.listen({ port }, function (err, _address) {
   if (err) {
