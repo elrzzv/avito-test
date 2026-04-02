@@ -7,9 +7,12 @@ const { Option } = Select;
 
 interface AdsHeaderProps {
   total: number;
+  search: string;
+  handleSearch: (searchText: string) => void;
 }
 
-export default function AdsPageHeader({total}: AdsHeaderProps): JSX.Element {
+export default function AdsPageHeader(
+  {total, search, handleSearch}: AdsHeaderProps): JSX.Element {
 
   const adsCountName = (total: number) => {
     if (!total)
@@ -39,6 +42,8 @@ export default function AdsPageHeader({total}: AdsHeaderProps): JSX.Element {
           placeholder="Найти объявление..." 
           suffix={<SearchOutlined />}
           className="search-input"
+          value={search}
+          onChange={(event) => handleSearch(event.target.value)}
         />
         <div className="view-toggle">
           <AppstoreOutlined className="icon active" />
@@ -49,6 +54,8 @@ export default function AdsPageHeader({total}: AdsHeaderProps): JSX.Element {
           <Option value="oldest">По новизне (сначала старые)</Option>
           <Option value="price-asc">По цене (возрастание)</Option>
           <Option value="price-desc">По цене (убывание)</Option>
+          <Option value="name-abc">По названию (А → Я)</Option>
+          <Option value="name-cba">По названию (Я → А)</Option>
         </Select>
       </div>
     </div>
