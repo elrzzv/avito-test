@@ -1,5 +1,5 @@
 export const Paths = {
-  Ad: '/ads',
+  Ads: '/ads',
   Product: '/ads/:id',
   Edit: '/ads/:id/edit',
   NotFound: '*'
