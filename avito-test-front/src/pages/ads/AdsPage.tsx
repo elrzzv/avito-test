@@ -12,6 +12,24 @@ import './AdsPage.css';
 
 const { Sider } = Layout;
 
+function calculateItemsPerPage(){
+  let itemsPerRow: number = 0;
+  let rowsToShow : number = 0;
+
+  const width = window.innerWidth;
+  if (width > 1400) itemsPerRow = 5;
+  else if (width > 1100) itemsPerRow = 4;
+  else if (width > 800) itemsPerRow = 3;
+  else itemsPerRow = 2;
+
+  const height = window.innerHeight;
+  if (height > 1200) rowsToShow = 3;
+  else if (height > 800) rowsToShow = 2;
+  else rowsToShow = 1;
+
+  return [itemsPerRow, rowsToShow];
+}
+
 export default function AdsPage(): JSX.Element {
 
   const [items, setItems] = useState<TItem[]>([]);
@@ -26,6 +44,15 @@ export default function AdsPage(): JSX.Element {
   useEffect(() => {
     loadProducts();
   }, []);
+
+  const [page, setPage] = useState<number>(1);
+
+  const [itemsPerRow, rowsToShow] = calculateItemsPerPage();
+  const itemsPerPage = itemsPerRow * rowsToShow;
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  console.log(total)
 
   return (
     <>
@@ -42,8 +69,9 @@ export default function AdsPage(): JSX.Element {
           </Sider>
           
           <Layout className="content-layout">
-            <AdCards ads={items} />
-            <AdsPageFooter />
+            <AdCards ads={items.slice(startIndex, endIndex)} />
+            <AdsPageFooter total={total} itemsPerPage={itemsPerPage}
+              page={page} setPage={setPage} />
           </Layout>
         </Layout>
       </div>

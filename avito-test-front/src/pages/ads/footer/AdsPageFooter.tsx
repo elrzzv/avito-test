@@ -3,21 +3,22 @@ import { Pagination } from 'antd';
 import './AdsPageFooter.css';
 
 export type AdsPageFooterProps = {
-  total?: number;
-  currentPage?: number;
-  onPageChange?: (page: number) => void;
+  total: number;
+  itemsPerPage: number;
+  page: number;
+  setPage: (page: number) => void;
 }
 
-export default function AdsPageFooter({total = 42, currentPage = 1, onPageChange }: AdsPageFooterProps): JSX.Element {
+export default function AdsPageFooter({total, itemsPerPage, page, setPage }: AdsPageFooterProps): JSX.Element {
   return (
     <footer className="page-footer">
       <div className="pagination-wrapper">
         <Pagination 
-          current={currentPage}
+          current={page}
           total={total} 
-          pageSize={10}
+          pageSize={itemsPerPage}
           showSizeChanger={false}
-          onChange={onPageChange}
+          onChange={setPage}
         />
       </div>
     </footer>

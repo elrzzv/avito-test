@@ -1,6 +1,7 @@
 .ads-content {
   background: transparent;
   flex: 1;
+  min-height: 300px;
 }
 
 .ads-grid {
