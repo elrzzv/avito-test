@@ -25,7 +25,7 @@ function ImageDescription({imageUrl, description}: ImageDescriptionProps): JSX.E
           Описание
         </Title>
         <Paragraph className="description-content">
-          {description}
+          {description || 'Отсутствует'}
         </Paragraph>
       </div>
     </div>

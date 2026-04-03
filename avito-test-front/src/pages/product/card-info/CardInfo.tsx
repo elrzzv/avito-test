@@ -1,32 +1,28 @@
 import { type JSX } from 'react';
 import ImageDescription from './image-description/ImageDescription';
 import ProductDetails from './details/ProductDetails';
+import { type Item } from '../../../types/types';
 import './CardInfo.css';
 
 interface CardInfoProps {
-  imageUrl: string;
-  type: string;
-  brand: string;
-  model: string;
-  description: string;
+  imageUrl?: string;
+  category: Item['category'];
+  params: Item['params'];
+  description?: string;
 }
 
-function CardInfo({imageUrl, type, brand, model, description}: CardInfoProps): JSX.Element{
+function CardInfo({imageUrl, category, params, description}: CardInfoProps): JSX.Element{
   return (
     <div className="card-info">
       <div className="card-info-grid">
         <div className="card-info-left">
           <ImageDescription 
-            imageUrl={imageUrl} 
-            description={description} 
+            imageUrl={imageUrl ?? '/placeholder-image.png'} 
+            description={description ?? ''}
           />
         </div>
         <div className="card-info-right">
-          <ProductDetails 
-            type={type} 
-            brand={brand} 
-            model={model} 
-          />
+          <ProductDetails category={category} params={params} />
         </div>
       </div>
     </div>

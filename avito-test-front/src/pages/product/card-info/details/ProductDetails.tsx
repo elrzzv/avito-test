@@ -1,31 +1,49 @@
 import { type JSX } from 'react';
 import { Typography, Alert } from 'antd';
 import { ExclamationCircleFilled } from '@ant-design/icons';
+import { type Item } from '../../../../types/types';
+import { 
+  PARAM_NAME, ALL_PARAMS_FIELDS, TRANSLATIONS
+} from '../../../../types/constants'; 
 import './ProductDetails.css';
 
 const { Title, Text } = Typography;
 
 interface ProductDetailsProps {
-  type: string;
-  brand: string;
-  model: string;
+  category: Item['category'];
+  params: Item['params'];
 }
 
-function ProductDetails({type, brand, model}: ProductDetailsProps): JSX.Element{
+function ProductDetails({category, params}: ProductDetailsProps): JSX.Element{
+  const getFieldNames = (category: Item['category']): string[] => {
+    return [...ALL_PARAMS_FIELDS[category]] as string[];
+  }
 
-  const isIncomplete = true;
+  const blankParams = getFieldNames(category)
+    .filter((field) => !(field in params));
+
+  const formatParam = (name: string) => {
+    return PARAM_NAME[name as keyof typeof PARAM_NAME] ?? 'unknown';
+  }
+
+  const formatParamValue = (value: string) => {
+    return TRANSLATIONS[value as keyof typeof TRANSLATIONS] ?? String(value);
+  }
 
   return (
     <div className="product-details">
-      {isIncomplete && (
+      {(blankParams.length > 0) && (
         <Alert
-          message={<span style={{ fontWeight: 620 }}>Требуются доработки</span>}
+          title={<span style={{ fontWeight: 620 }}>Требуются доработки</span>}
           description={
             <div className="warning-description">
               У объявления не заполнены поля:
               <ul className="warning-list">
-                <li>Цвет</li>
-                <li>Состояние</li>
+                {
+                  blankParams.map((p, i) => 
+                    <li key={i}>{formatParam(p)}</li>
+                  )
+                }
               </ul>
             </div>
           }
@@ -39,20 +57,22 @@ function ProductDetails({type, brand, model}: ProductDetailsProps): JSX.Element{
         <Title level={4} className="characteristics-title">
           Характеристики
         </Title>
+
         <div className="characteristics-list">
-          <div className="characteristic-item">
-            <Text className="characteristic-label">Тип</Text>
-            <Text className="characteristic-value">{type || '—'}</Text>
-          </div>
-          <div className="characteristic-item">
-            <Text className="characteristic-label">Бренд</Text>
-            <Text className="characteristic-value">{brand || '—'}</Text>
-          </div>
-          <div className="characteristic-item">
-            <Text className="characteristic-label">Модель</Text>
-            <Text className="characteristic-value">{model || '—'}</Text>
-          </div>
+          {
+            Object.keys(params).map((p, i) => 
+              <div key={i} className="characteristic-item">
+                <Text className="characteristic-label">
+                  {formatParam(p)}
+                </Text>
+                <Text className="characteristic-value">
+                    {formatParamValue(params[p as keyof typeof params])}
+                </Text>
+              </div>
+            )
+          }
         </div>
+
       </div>
     </div>
   );

@@ -56,6 +56,8 @@
 .characteristics-section {
   flex: 1;
   text-align: left;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 .characteristics-title {
@@ -68,20 +70,21 @@
 .characteristics-list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 }
 
 .characteristic-item {
   display: flex;
-  gap: 80px;
+  gap: 24px;
   padding: 0;
   border-bottom: none;
   line-height: 1.5;
+  align-items: baseline;
 }
 
 .characteristic-label {
   font-weight: 600;
-  min-width: 70px;
+  min-width: 150px;
   color: #8c8c8c;
   font-size: 14px;
 }
