@@ -12,17 +12,17 @@ interface AdsPageSiderProps {
 }
 
 export default function AdsPageSider(
-  { 
+  {
     selectedCategories, needsRevision, onCategoryChange, onNeedsRevisionChange, onReset
   }: AdsPageSiderProps): JSX.Element {
 
-  const categories = ['auto', 'electronics', 'real_estate' ];
+  const categories = ['auto', 'electronics', 'real_estate'];
 
   return (
     <div className="filters-sidebar">
       <div className="filters-main-card">
         <h3 className="filters-title">Фильтры</h3>
-        
+
         <div className="filter-group">
 
           <div className="filter-header">
@@ -31,9 +31,9 @@ export default function AdsPageSider(
           </div>
 
           <div className="filter-options">
-            {categories.map((c, i) => 
+            {categories.map((c, i) =>
               <label key={i} className="checkbox-label">
-                <input 
+                <input
                   type="checkbox"
                   value={c}
                   checked={selectedCategories.includes(c)}
@@ -51,7 +51,7 @@ export default function AdsPageSider(
         <div className="filter-group">
           <label className="switch-label">
             <span>Только требующие доработок</span>
-            <Switch 
+            <Switch
               size="small"
               checked={needsRevision}
               onChange={onNeedsRevisionChange}
@@ -60,7 +60,7 @@ export default function AdsPageSider(
         </div>
       </div>
 
-      <button 
+      <button
         className="reset-filters-btn"
         onClick={onReset}
       >

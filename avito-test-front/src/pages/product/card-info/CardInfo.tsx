@@ -11,13 +11,13 @@ interface CardInfoProps {
   description?: string;
 }
 
-function CardInfo({imageUrl, category, params, description}: CardInfoProps): JSX.Element{
+function CardInfo({ imageUrl, category, params, description }: CardInfoProps): JSX.Element {
   return (
     <div className="card-info">
       <div className="card-info-grid">
         <div className="card-info-left">
-          <ImageDescription 
-            imageUrl={imageUrl ?? '/placeholder-image.png'} 
+          <ImageDescription
+            imageUrl={imageUrl ?? '/placeholder-image.png'}
             description={description ?? ''}
           />
         </div>

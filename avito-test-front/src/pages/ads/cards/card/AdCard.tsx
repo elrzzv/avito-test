@@ -21,7 +21,7 @@ export default function AdCard({ ad }: AdCardProps): JSX.Element {
 
   return (
     <div className="ad-card-wrapper">
-      <Card 
+      <Card
         className="ad-card"
         hoverable
         cover={<img alt={ad.title} src={placeholder_image} className="ad-image" />}

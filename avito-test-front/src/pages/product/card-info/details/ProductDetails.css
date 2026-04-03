@@ -14,7 +14,7 @@
   border: none;
   margin-bottom: 0;
   width: 50%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .warning-alert .ant-alert-message {
@@ -98,42 +98,42 @@
   .product-details {
     gap: 20px;
   }
-  
+
   .warning-alert {
     padding: 12px;
     max-width: 100%;
   }
-  
+
   .warning-alert .ant-alert-message {
     font-size: 13px;
   }
-  
+
   .warning-alert .ant-alert-description {
     font-size: 12px;
   }
-  
+
   .warning-list li {
     font-size: 12px;
   }
-  
+
   .characteristics-title {
     font-size: 16px !important;
     margin-bottom: 12px !important;
   }
-  
+
   .characteristics-list {
     gap: 10px;
   }
-  
+
   .characteristic-item {
     gap: 20px;
   }
-  
+
   .characteristic-label {
     min-width: 65px;
     font-size: 13px;
   }
-  
+
   .characteristic-value {
     font-size: 13px;
   }

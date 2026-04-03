@@ -4,7 +4,7 @@
   gap: 20px;
 }
 
-.required-field .ant-form-item-label > label::before {
+.required-field .ant-form-item-label>label::before {
   content: '*';
   color: #ff4d4f;
   margin-right: 4px;

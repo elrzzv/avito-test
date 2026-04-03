@@ -18,12 +18,12 @@
 
 /*обводка каждой кнопки серым*/
 .pagination-wrapper .ant-pagination-item {
-  border: 1px solid #e8e8e8; 
-  border-radius: 6px;         
-  margin: 0 4px;              
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  margin: 0 4px;
 }
 
 /*обводка активной кнопки синим*/
 .pagination-wrapper .ant-pagination-item-active {
-  border-color: #4096ff;    
+  border-color: #4096ff;
 }

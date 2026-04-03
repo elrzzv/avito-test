@@ -8,7 +8,7 @@ import './NotFoundPage.css';
 
 const { Title, Text } = Typography;
 
-function NotFoundPage():JSX.Element {
+function NotFoundPage(): JSX.Element {
 
   const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ function NotFoundPage():JSX.Element {
         <Title level={2} className="error-title">
           Страница не найдена
         </Title>
-        
+
         <Text className="error-description">
           Извините, страница, которую вы ищете, не существует или была перемещена
         </Text>

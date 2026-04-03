@@ -18,7 +18,7 @@ export default function AdCards({ ads, loading }: AdCardsProps): JSX.Element {
               <AdCard key={ad.id} ad={ad} />
             ))}
           </div>
-        ):( 
+        ) : (
           <div className="skeleton-grid">
             {[...Array(ads.length)].map((_, i) => (
               <div key={i} className="skeleton-card" />

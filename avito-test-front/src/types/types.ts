@@ -6,19 +6,19 @@ export type Item = {
   createdAt: string;
   updatedAt: string;
 } & (
-  | {
+    | {
       category: 'auto';
       params: AutoItemParams;
     }
-  | {
+    | {
       category: 'real_estate';
       params: RealEstateItemParams;
     }
-  | {
+    | {
       category: 'electronics';
       params: ElectronicsItemParams;
     }
-);
+  );
 
 type AutoItemParams = {
   brand?: string;
@@ -49,7 +49,7 @@ export type ItemSortColumn = Extract<keyof Item, 'title' | 'createdAt' | 'price'
 export type SortDirection = 'asc' | 'desc';
 
 export interface TItemsListResponseItem {
-  id: number; 
+  id: number;
   category: Item['category'];
   title: Item['title'];
   price: Item['price'];

@@ -18,7 +18,7 @@ export const PARAM_NAME = {
   enginePower: 'Мощность двигателя',
   type: 'Тип',
   address: 'Адрес',
-  area: 'Площадь',  
+  area: 'Площадь',
   floor: 'Этаж',
   condition: 'Состояние',
   color: 'Цвет'
@@ -27,15 +27,15 @@ export const PARAM_NAME = {
 export const TRANSLATIONS = {
   // для electronics
   phone: 'Телефон',
-  laptop: 'Ноутбук', 
+  laptop: 'Ноутбук',
   misc: 'Разное',
   new: 'Новый',
   used: 'Б/У',
-  
+
   // для auto
   automatic: 'Автомат',
   manual: 'Механика',
-  
+
   // для real_estate
   flat: 'Квартира',
   house: 'Дом',

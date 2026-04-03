@@ -9,7 +9,7 @@ interface ImageDescriptionProps {
   description: string;
 }
 
-function ImageDescription({imageUrl, description}: ImageDescriptionProps): JSX.Element{
+function ImageDescription({ imageUrl, description }: ImageDescriptionProps): JSX.Element {
   return (
     <div className="image-description">
       <div className="image-container">

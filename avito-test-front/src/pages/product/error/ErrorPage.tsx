@@ -29,7 +29,7 @@ export default function ErrorPage(): JSX.Element {
         <Title level={2} className="error-title">
           Товар не найден
         </Title>
-        
+
         <Text className="error-description">
           К сожалению, товар, который вы ищете, не существует или был удалён
         </Text>

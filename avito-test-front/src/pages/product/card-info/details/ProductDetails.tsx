@@ -2,9 +2,9 @@ import { type JSX } from 'react';
 import { Typography, Alert } from 'antd';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { type Item } from '../../../../types/types';
-import { 
+import {
   PARAM_NAME, ALL_PARAMS_FIELDS, TRANSLATIONS
-} from '../../../../types/constants'; 
+} from '../../../../types/constants';
 import './ProductDetails.css';
 
 const { Title, Text } = Typography;
@@ -14,9 +14,9 @@ interface ProductDetailsProps {
   params: Item['params'];
 }
 
-function ProductDetails({category, params}: ProductDetailsProps): JSX.Element{
-  const getFieldNames = (category: Item['category']): string[] => {
-    return [...ALL_PARAMS_FIELDS[category]] as string[];
+function ProductDetails({ category, params }: ProductDetailsProps): JSX.Element {
+  const getFieldNames = (category: Item['category']): readonly string[] => {
+    return ALL_PARAMS_FIELDS[category];
   }
 
   const blankParams = getFieldNames(category)
@@ -40,7 +40,7 @@ function ProductDetails({category, params}: ProductDetailsProps): JSX.Element{
               У объявления не заполнены поля:
               <ul className="warning-list">
                 {
-                  blankParams.map((p, i) => 
+                  blankParams.map((p, i) =>
                     <li key={i}>{formatParam(p)}</li>
                   )
                 }
@@ -60,13 +60,13 @@ function ProductDetails({category, params}: ProductDetailsProps): JSX.Element{
 
         <div className="characteristics-list">
           {
-            Object.keys(params).map((p, i) => 
+            Object.keys(params).map((p, i) =>
               <div key={i} className="characteristic-item">
                 <Text className="characteristic-label">
                   {formatParam(p)}
                 </Text>
                 <Text className="characteristic-value">
-                    {formatParamValue(params[p as keyof typeof params])}
+                  {formatParamValue(params[p as keyof typeof params])}
                 </Text>
               </div>
             )

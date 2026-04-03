@@ -157,6 +157,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -164,21 +165,28 @@
 }
 
 @keyframes floatIcon {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px) scale(1);
   }
+
   50% {
     transform: translateY(-10px) scale(1.05);
   }
 }
 
 @keyframes floatBlob {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
   }
+
   33% {
     transform: translate(20px, -20px) scale(1.1);
   }
+
   66% {
     transform: translate(-15px, 15px) scale(0.9);
   }
@@ -190,20 +198,20 @@
     max-width: 90%;
     border-radius: 32px;
   }
-  
+
   .error-icon {
     font-size: 60px;
   }
-  
+
   .error-title {
     font-size: 26px !important;
   }
-  
+
   .error-description {
     font-size: 14px;
     max-width: 320px;
   }
-  
+
   .back-button,
   .ads-button {
     height: 42px;
@@ -215,39 +223,54 @@
     filter: blur(40px);
   }
 
-  .blob-1 { width: 200px; height: 200px; }
-  .blob-2 { width: 180px; height: 180px; }
-  .blob-3 { width: 150px; height: 150px; }
-  .blob-4 { width: 140px; height: 140px; }
+  .blob-1 {
+    width: 200px;
+    height: 200px;
+  }
+
+  .blob-2 {
+    width: 180px;
+    height: 180px;
+  }
+
+  .blob-3 {
+    width: 150px;
+    height: 150px;
+  }
+
+  .blob-4 {
+    width: 140px;
+    height: 140px;
+  }
 }
 
 @media (max-width: 480px) {
   .error-content {
     padding: 32px 20px;
   }
-  
+
   .error-icon {
     font-size: 50px;
     margin-bottom: 16px;
   }
-  
+
   .action-buttons {
     flex-direction: column;
     gap: 12px !important;
     width: 100%;
   }
-  
+
   .action-buttons .ant-space-item {
     width: 100%;
     margin: 0 !important;
   }
-  
+
   .back-button,
   .ads-button {
     width: 100%;
     justify-content: center;
   }
-  
+
   .error-title {
     font-size: 22px !important;
   }

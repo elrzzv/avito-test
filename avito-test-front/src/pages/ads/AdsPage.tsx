@@ -7,18 +7,18 @@ import AdsPageHeader from './header/AdsPageHeader';
 import AdsPageSider from './sider/AdsPageSider';
 import AdCards from './cards/AdCards';
 import AdsPageFooter from './footer/AdsPageFooter';
-import { 
+import {
   type TItemsListResponseItem as TItem,
   type ItemSortColumn as TItemSortColumn,
   type SortDirection as TSortDirection
-} from "../../types/types"; 
+} from "../../types/types";
 import './AdsPage.css';
 
 const { Sider } = Layout;
 
-function calculateItemsPerPage(){
+function calculateItemsPerPage() {
   let itemsPerRow: number = 0;
-  let rowsToShow : number = 0;
+  let rowsToShow: number = 0;
 
   const width = window.innerWidth;
   if (width > 1400) itemsPerRow = 5;
@@ -48,11 +48,11 @@ export default function AdsPage(): JSX.Element {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [needsRevision, setNeedsRevision] = useState<boolean>(false);
   const [search, setSearch] = useState<string>('');
-  const [sort, setSort] = useState<Tsort>({sortColumn: 'createdAt',sortDirection: 'desc'})
+  const [sort, setSort] = useState<Tsort>({ sortColumn: 'createdAt', sortDirection: 'desc' })
 
   const loadProducts = useCallback(async () => {
     setLoading(true);
-    try{
+    try {
       const params = new URLSearchParams();
       params.append('limit', '100');
       params.append('q', search);
@@ -61,7 +61,7 @@ export default function AdsPage(): JSX.Element {
       if (selectedCategories.length > 0) {
         params.append('categories', selectedCategories.join(','));
       }
-      if (needsRevision){
+      if (needsRevision) {
         params.append('needsRevision', 'true')
       }
 
@@ -85,8 +85,8 @@ export default function AdsPage(): JSX.Element {
   };
 
   const handleCategoryChange = (category: string, checked: boolean) => {
-    setSelectedCategories(prev => 
-      checked 
+    setSelectedCategories(prev =>
+      checked
         ? [...prev, category]
         : prev.filter(c => c !== category)
     );
@@ -126,17 +126,17 @@ export default function AdsPage(): JSX.Element {
       <Helmet>
         <title>Мои объявления - Avito</title>
       </Helmet>
-      
+
       <div className="page-container">
-        <AdsPageHeader 
-          total={total} 
-          search={search} onSearch={handleSearch} 
+        <AdsPageHeader
+          total={total}
+          search={search} onSearch={handleSearch}
           sort={sort} onSort={handleSort}
         />
 
         <Layout className="main-layout">
           <Sider width={240} className="sider-wrapper" theme="light">
-            <AdsPageSider 
+            <AdsPageSider
               selectedCategories={selectedCategories}
               needsRevision={needsRevision}
               onCategoryChange={handleCategoryChange}
@@ -144,13 +144,13 @@ export default function AdsPage(): JSX.Element {
               onReset={handleResetFilters}
             />
           </Sider>
-          
+
           <Layout className="content-layout">
-            <AdCards 
+            <AdCards
               ads={items.slice(startIndex, endIndex)} loading={loading}
             />
 
-            <AdsPageFooter 
+            <AdsPageFooter
               total={total} itemsPerPage={itemsPerPage}
               page={page} onPageChange={handlePageChange} />
           </Layout>

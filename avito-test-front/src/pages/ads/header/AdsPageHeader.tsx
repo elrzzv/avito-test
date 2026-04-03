@@ -25,9 +25,9 @@ export default function AdsPageHeader(
       return `${total} объявлений`;
     if (totalMod10 === 1)
       return `${total} объявление`;
-    if (totalMod10 >=2 && totalMod10 <=4)
+    if (totalMod10 >= 2 && totalMod10 <= 4)
       return `${total} объявления`;
-    if ((totalMod10 >=5 && totalMod10 <=9) || (totalMod10 === 0))
+    if ((totalMod10 >= 5 && totalMod10 <= 9) || (totalMod10 === 0))
       return `${total} объявлений`;
     return '';
   }

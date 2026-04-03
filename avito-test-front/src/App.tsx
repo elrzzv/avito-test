@@ -1,6 +1,6 @@
 import { type JSX } from 'react'
 import { Routes, Route } from 'react-router'
-import { PATHS } from './types/constants' 
+import { PATHS } from './types/constants'
 
 import AdsPage from './pages/ads/AdsPage'
 import ProductPage from './pages/product/ProductPage'
@@ -9,7 +9,7 @@ import NotFoundPage from './pages/not-found/NotFoundPage'
 import './App.css'
 
 export default function App(): JSX.Element {
-  return(
+  return (
     <Routes>
       <Route path={PATHS.Ads} element={<AdsPage />} />
       <Route path={`${PATHS.Ads}/:id`} element={<ProductPage />} />

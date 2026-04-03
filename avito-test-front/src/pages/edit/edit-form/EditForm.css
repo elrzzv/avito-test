@@ -21,7 +21,7 @@
   max-width: 500px;
 }
 
-.ant-form-item-label > label {
+.ant-form-item-label>label {
   font-weight: 500;
   color: #262626;
   font-size: 14px;

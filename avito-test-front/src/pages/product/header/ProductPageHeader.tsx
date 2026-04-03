@@ -18,7 +18,7 @@ interface ProductPageHeaderProps {
 
 function ProductPageHeader({ title, price,
   createdAt, updatedAt, onEdit }: ProductPageHeaderProps): JSX.Element {
-    
+
   return (
     <div className="product-header">
       <div className="header-left">
@@ -46,7 +46,7 @@ function ProductPageHeader({ title, price,
               <Text className="date-label">Отредактировано:</Text>
               <Text className="date-text">{formatDate(updatedAt)}</Text>
             </div>
-          : null
+            : null
         }
       </div>
     </div>

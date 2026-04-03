@@ -9,13 +9,13 @@ export type AdsPageFooterProps = {
   onPageChange: (page: number) => void;
 }
 
-export default function AdsPageFooter({total, itemsPerPage, page, onPageChange }: AdsPageFooterProps): JSX.Element {
+export default function AdsPageFooter({ total, itemsPerPage, page, onPageChange }: AdsPageFooterProps): JSX.Element {
   return (
     <footer className="page-footer">
       <div className="pagination-wrapper">
-        <Pagination 
+        <Pagination
           current={page}
-          total={total} 
+          total={total}
           pageSize={itemsPerPage}
           showSizeChanger={false}
           onChange={onPageChange}
