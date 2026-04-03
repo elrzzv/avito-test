@@ -1,4 +1,5 @@
 import type { JSX } from "react";
+import { useNavigate } from "react-router";
 import { Card } from 'antd';
 import { type TItemsListResponseItem as TItem } from "../../../../types/types";
 import { formatMoney } from "../../../../utils/money";
@@ -12,12 +13,18 @@ export type AdCardProps = {
 const placeholder_image = '/placeholder-image.png';
 
 export default function AdCard({ ad }: AdCardProps): JSX.Element {
+  const navigate = useNavigate();
+  const handleGoToProductPage = () => {
+    navigate(`/ads/${ad.id}`);
+  }
+
   return (
     <div className="ad-card-wrapper">
       <Card 
         className="ad-card"
         hoverable
         cover={<img alt={ad.title} src={placeholder_image} className="ad-image" />}
+        onClick={handleGoToProductPage}
       >
         <div className="ad-content">
           <h3 className="ad-title">{ad.title}</h3>
