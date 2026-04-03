@@ -3,7 +3,7 @@ import { Button, Space, Typography } from 'antd';
 import { useNavigate } from 'react-router';
 import { ArrowLeftOutlined, AppstoreOutlined } from '@ant-design/icons';
 
-import { Paths } from '../../const';
+import { PATHS } from '../../types/constants';
 import './NotFoundPage.css';
 
 const { Title, Text } = Typography;
@@ -17,7 +17,7 @@ function NotFoundPage():JSX.Element {
   };
 
   const handleGoToAds = () => {
-    navigate(Paths.Ads);
+    navigate(PATHS.Ads);
   };
 
   return (
