@@ -1,33 +1,23 @@
-import { type JSX } from 'react';
+import { useCallback, useEffect, useState, type JSX } from 'react';
+import { useParams } from 'react-router';
+import axios from 'axios';
 import ProductPageHeader from './header/ProductPageHeader';
 import CardInfo from './card-info/CardInfo';
+import { type Item } from '../../types/types';
 import './ProductPage.css';
 
-interface ProductData {
-  name: string;
-  price: number;
-  publishDate: string;
-  editDate: string;
-  imageUrl: string;
-  type: string;
-  brand: string;
-  model: string;
-  description: string;
-}
-
 function ProductPage():JSX.Element{
+  const {id} = useParams();
+  const [productData, setProductData] = useState<Item>();
 
-  const productData: ProductData = {
-    name: 'MacBook Pro 16”',
-    price: 64000,
-    publishDate: '10 марта 22:39',
-    editDate: '10 марта 23:12',
-    imageUrl: '/placeholder-image.png',
-    type: 'Ноутбук',
-    brand: 'Apple',
-    model: 'M1 Pro',
-    description: 'Продаю свой MacBook Pro 16" (2021) на чипе M1 Pro. Состояние отличное, работал бережно. Мощности хватает на всё: от сложного монтажа до кода, при этом ноутбук почти не греется.'
-  };
+  const loadProducts = useCallback(async() => {
+    const response = await axios.get(`/api/items/${id}`);
+    setProductData(response.data);
+  }, [id]);
+
+  useEffect(() => {
+    loadProducts();
+  }, [loadProducts]);
 
   const handleEdit = () => {
     console.log('Редактировать товар');
@@ -36,20 +26,25 @@ function ProductPage():JSX.Element{
 
   return (
     <div className="product-page">
-      <ProductPageHeader
-        productName={productData.name}
-        price={productData.price}
-        publishDate={productData.publishDate}
-        editDate={productData.editDate}
-        onEdit={handleEdit}
-      />
-      <CardInfo
-        imageUrl={productData.imageUrl}
-        type={productData.type}
-        brand={productData.brand}
-        model={productData.model}
-        description={productData.description}
-      />
+      {
+        productData ? (<>
+          <ProductPageHeader
+            title={productData.title}
+            price={productData.price}
+            createdAt={productData.createdAt}
+            updatedAt={productData.updatedAt}
+            onEdit={handleEdit}
+          />
+          
+          <CardInfo
+            category={productData.category}
+            params={productData.params}
+            description={productData.description}
+          />          
+        </>): (
+          <div>Loading or error </div>
+        )
+      }
     </div>
   );
 };
