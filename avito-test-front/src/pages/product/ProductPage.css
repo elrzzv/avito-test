@@ -6,25 +6,3 @@
   overflow: hidden;
   background-color: #FFFFFF;
 }
-
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100%;
-  background-color: #FFFFFF;
-}
-
-.loading-image {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 20px;
-}
-
-.loading-text {
-  font-size: 16px;
-  color: #666;
-  font-weight: 400;
-}

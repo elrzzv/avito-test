@@ -5,12 +5,13 @@ import ProductPageHeader from './header/ProductPageHeader';
 import CardInfo from './card-info/CardInfo';
 import { type Item } from '../../types/types';
 import './ProductPage.css';
-import ErrorPage from './error/ErrorPage';
+import ErrorPage from '../../components/error/ErrorPage';
+import LoadingPage from '../../components/loading-page/LoadingPage';
 
 function ProductPage(): JSX.Element {
   const { id } = useParams();
   const [productData, setProductData] = useState<Item>();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const loadProducts = useCallback(async () => {
     setIsLoading(true);
@@ -28,16 +29,9 @@ function ProductPage(): JSX.Element {
     loadProducts();
   }, [loadProducts]);
 
-  const handleEdit = () => {
-    console.log('Редактировать товар');
-  };
-
   if (isLoading) {
     return (
-      <div className="loading-container">
-        <img src="/loading.webp" alt="Загрузка" className="loading-image" />
-        <div className="loading-text">Ожидайте, страница загружается...</div>
-      </div>
+      <LoadingPage />
     );
   }
 
@@ -50,7 +44,6 @@ function ProductPage(): JSX.Element {
             price={productData.price}
             createdAt={productData.createdAt}
             updatedAt={productData.updatedAt}
-            onEdit={handleEdit}
           />
           <CardInfo
             category={productData.category}
