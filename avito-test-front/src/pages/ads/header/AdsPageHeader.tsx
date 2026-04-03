@@ -15,18 +15,19 @@ interface AdsHeaderProps {
 }
 
 export default function AdsPageHeader(
-  {total, search, onSearch, sort, onSort}: AdsHeaderProps): JSX.Element {
+  { total, search, onSearch, sort, onSort }: AdsHeaderProps): JSX.Element {
 
   const adsCountName = (total: number) => {
+    const totalMod10 = total % 10;
     if (!total)
       return 'Нет актуальных объявлений';
-    if (total >= 11 && total <= 19)
+    if (total % 100 >= 11 && total % 100 <= 19)
       return `${total} объявлений`;
-    if (total%10 === 1)
+    if (totalMod10 === 1)
       return `${total} объявление`;
-    if (total%10 in [2, 3, 4])
+    if (totalMod10 >=2 && totalMod10 <=4)
       return `${total} объявления`;
-    if (total%10 in [5, 6, 7, 8, 9])
+    if ((totalMod10 >=5 && totalMod10 <=9) || (totalMod10 === 0))
       return `${total} объявлений`;
     return '';
   }
@@ -43,10 +44,10 @@ export default function AdsPageHeader(
           {adsCountName(total)}
         </span>
       </div>
-      
+
       <div className="search-section">
-        <Input 
-          placeholder="Найти объявление..." 
+        <Input
+          placeholder="Найти объявление..."
           suffix={<SearchOutlined />}
           className="search-input"
           value={search}
@@ -56,8 +57,8 @@ export default function AdsPageHeader(
           <AppstoreOutlined className="icon active" />
           <UnorderedListOutlined className="icon" />
         </div>
-        <Select 
-          value={getSelectValue(sort)} 
+        <Select
+          value={getSelectValue(sort)}
           className="sort-select"
           onChange={onSort}
         >
