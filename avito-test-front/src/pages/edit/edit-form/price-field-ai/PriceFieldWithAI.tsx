@@ -1,8 +1,8 @@
 import { useCallback, useState, type JSX } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import { BulbOutlined, LoadingOutlined, RedoOutlined } from '@ant-design/icons';
-import type { Item } from '../../../../types/types';
-import { getMarketPrice } from '../../../../services/gigachat';
+import type { Item } from '../../../../entities/item/model';
+import { getMarketPrice } from '../../../../shared/api/gigachat';
 import { AIPriceTooltip } from './ai-price-tooltip/AIPriceTooltip';
 import './PriceFieldWithAI.css';
 

@@ -1,7 +1,7 @@
 import { type JSX } from 'react';
 import ImageDescription from './image-description/ImageDescription';
 import ProductDetails from './details/ProductDetails';
-import { type Item } from '../../../types/types';
+import { type Item } from '../../../entities/item/model';
 import './CardInfo.css';
 
 interface CardInfoProps {

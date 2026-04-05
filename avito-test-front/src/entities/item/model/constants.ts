@@ -4,13 +4,7 @@ export const ITEM_CATEGORIES = {
   ELECTRONICS: 'electronics',
 } as const;
 
-export const PATHS = {
-  Ads: '/ads',
-  NotFound: '*'
-} as const
-
 export const TRANSLATIONS = {
-  // общие 
   brand: 'Бренд',
   model: 'Модель',
   yearOfManufacture: 'Год производства',
@@ -23,19 +17,13 @@ export const TRANSLATIONS = {
   floor: 'Этаж',
   condition: 'Состояние',
   color: 'Цвет',
-
-  // для electronics
   phone: 'Телефон',
   laptop: 'Ноутбук',
   misc: 'Разное',
   new: 'Новый',
   used: 'Б/У',
-
-  // для auto
   automatic: 'Автомат',
   manual: 'Механика',
-
-  // для real_estate
   flat: 'Квартира',
   house: 'Дом',
   room: 'Комната'
@@ -52,21 +40,21 @@ export const DEFAULT_PARAMS_VALUES = {
     brand: '',
     model: '',
     yearOfManufacture: null,
-    transmission: undefined, //литералы
+    transmission: undefined,
     mileage: null,
     enginePower: null
   },
   real_estate: {
-    type: undefined, //литерлы
+    type: undefined,
     address: '',
     area: null,
     floor: null
   },
   electronics: {
-    type: undefined, //литералы
+    type: undefined,
     brand: '',
     model: '',
-    condition: undefined, //литералы 
+    condition: undefined,
     color: ''
   }
 } as const;

@@ -1,8 +1,8 @@
 import { type JSX } from 'react';
 import { Typography, Alert } from 'antd';
 import { ExclamationCircleFilled } from '@ant-design/icons';
-import { type Item } from '../../../../types/types';
-import { ALL_PARAMS_FIELDS, TRANSLATIONS } from '../../../../types/constants';
+import { type Item } from '../../../../entities/item/model';
+import { ALL_PARAMS_FIELDS, TRANSLATIONS } from '../../../../entities/item/model';
 import './ProductDetails.css';
 
 const { Title, Text } = Typography;

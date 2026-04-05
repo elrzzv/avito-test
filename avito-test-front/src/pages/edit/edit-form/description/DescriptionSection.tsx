@@ -3,7 +3,7 @@ import { Form, Input } from 'antd';
 import { useWatch } from 'antd/es/form/Form';
 
 import AIDescriptionButton from './ai-button/AIDescriptionButton';
-import type { Item } from '../../../../types/types';
+import type { Item } from '../../../../entities/item/model';
 import './DescriptionSection.css';
 
 const { TextArea } = Input;

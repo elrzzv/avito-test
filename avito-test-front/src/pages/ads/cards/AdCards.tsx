@@ -1,6 +1,6 @@
 import { type JSX } from "react";
 import AdCard from './card/AdCard'
-import { type TItemsListResponseItem as TItem } from "../../../types/types";
+import { type TItemsListResponseItem as TItem } from "../../../entities/item/model";
 import './AdCards.css';
 
 export type AdCardsProps = {

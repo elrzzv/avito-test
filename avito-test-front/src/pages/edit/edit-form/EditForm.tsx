@@ -6,7 +6,7 @@ import CharacteristicsSection from './characteristics/CharacteristicsSection';
 import DescriptionSection from './description/DescriptionSection';
 import FormActions from './form-actions/FormActions';
 import './EditForm.css';
-import type { Item } from '../../../types/types';
+import type { Item } from '../../../entities/item/model';
 
 interface EditFormProps {
   formData: Item;

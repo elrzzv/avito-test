@@ -1,4 +1,4 @@
-import { type Item } from "../types/types";
+import { type Item } from '../../entities/item/model';
 
 export async function getMarketPrice(item: Item): Promise<string> {
   try {

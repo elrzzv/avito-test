@@ -1,10 +1,10 @@
 import type { JSX } from "react";
 import { useNavigate } from "react-router";
 import { Card } from 'antd';
-import { type TItemsListResponseItem as TItem } from "../../../../types/types";
-import { PATHS } from "../../../../types/constants";
-import { formatMoney } from "../../../../utils/money";
-import { formatCategory } from "../../../../utils/category";
+import { type TItemsListResponseItem as TItem } from "../../../../entities/item/model";
+import { PATHS } from "../../../../app/router";
+import { formatMoney } from "../../../../shared/lib/money";
+import { formatCategory } from "../../../../shared/lib/category";
 import './AdCard.css';
 
 export type AdCardProps = {

@@ -1,8 +1,8 @@
 import { useCallback, useState, type JSX } from 'react';
 import { Form, Button, message } from 'antd';
 import { BulbOutlined, LoadingOutlined, RedoOutlined } from '@ant-design/icons';
-import type { Item } from '../../../../../types/types';
-import { improveDescription } from '../../../../../services/gigachat';
+import type { Item } from '../../../../../entities/item/model';
+import { improveDescription } from '../../../../../shared/api/gigachat';
 import { AIDescriptionTooltip } from './ai-description-tooltip/AIDescriptionTooltip';
 import './AIDescriptionButton.css';
 

@@ -1,9 +1,9 @@
-import { type JSX } from 'react';
+import type { JSX } from 'react';
 import { Button, Space, Typography } from 'antd';
 import { useNavigate } from 'react-router';
 import { ArrowLeftOutlined, AppstoreOutlined } from '@ant-design/icons';
 
-import { PATHS } from '../../types/constants';
+import { PATHS } from '../../app/router';
 import './ErrorPage.css';
 
 const { Title, Text } = Typography;

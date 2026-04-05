@@ -4,13 +4,12 @@ import { ConfigProvider } from 'antd';
 import ruRU from 'antd/locale/ru_RU';
 
 import EditForm from './edit-form/EditForm';
-import type { Item } from '../../types/types';
-import { DEFAULT_PARAMS_VALUES } from '../../types/constants';
-import axios from 'axios';
-import LoadingPage from '../../components/loading-page/LoadingPage';
-import ErrorPage from '../../components/error/ErrorPage';
+import type { Item } from '../../entities/item/model';
+import { DEFAULT_PARAMS_VALUES } from '../../entities/item/model';
+import { getItem, updateItem } from '../../entities/item/api';
+import LoadingPage from '../../widgets/loading-page/LoadingPage';
+import ErrorPage from '../../widgets/error-page/ErrorPage';
 import './EditPage.css';
-
 
 
 function EditPage(): JSX.Element {
@@ -24,8 +23,7 @@ function EditPage(): JSX.Element {
     const loadData = async () => {
       try {
         setIsLoading(true)
-        const response = await axios.get(`/api/items/${id}`);
-        const data = response.data;
+        const data = await getItem(Number(id));
         setFormData(data);
         sessionStorage.setItem(`form-data-${id}`, JSON.stringify(data));
       } catch (error) {
@@ -82,8 +80,7 @@ function EditPage(): JSX.Element {
     const putData = async () => {
       try {
         setIsLoading(true)
-        await axios.put(`/api/items/${id}`, formData);
-        setFormData(formData);
+        await updateItem(Number(id), formData!);
         sessionStorage.setItem(`form-data-${id}`, JSON.stringify(formData));
       } catch (error) {
         console.error('Ошибка отправки данных:', error);

@@ -3,7 +3,7 @@ import { Button, Space, Typography } from 'antd';
 import { useNavigate } from 'react-router';
 import { ArrowLeftOutlined, AppstoreOutlined } from '@ant-design/icons';
 
-import { PATHS } from '../../types/constants';
+import { PATHS } from '../../app/router';
 import './NotFoundPage.css';
 
 const { Title, Text } = Typography;

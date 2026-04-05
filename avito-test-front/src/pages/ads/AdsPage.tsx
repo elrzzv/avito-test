@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState, type JSX } from "react";
-import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import { Layout } from 'antd';
 
@@ -7,11 +6,8 @@ import AdsPageHeader from './header/AdsPageHeader';
 import AdsPageSider from './sider/AdsPageSider';
 import AdCards from './cards/AdCards';
 import AdsPageFooter from './footer/AdsPageFooter';
-import {
-  type TItemsListResponseItem as TItem,
-  type ItemSortColumn as TItemSortColumn,
-  type SortDirection as TSortDirection
-} from "../../types/types";
+import { type TItemsListResponseItem as TItem, type ItemSortColumn, type SortDirection } from "../../entities/item/model";
+import { getItems } from "../../entities/item/api";
 import './AdsPage.css';
 
 const { Sider } = Layout;
@@ -35,8 +31,8 @@ function calculateItemsPerPage() {
 }
 
 export interface Tsort {
-  sortColumn: TItemSortColumn;
-  sortDirection: TSortDirection;
+  sortColumn: ItemSortColumn;
+  sortDirection: SortDirection;
 }
 
 export default function AdsPage(): JSX.Element {
@@ -53,22 +49,16 @@ export default function AdsPage(): JSX.Element {
   const loadProducts = useCallback(async () => {
     setLoading(true);
     try {
-      const params = new URLSearchParams();
-      params.append('limit', '100');
-      params.append('q', search);
-      params.append('sortColumn', sort.sortColumn);
-      params.append('sortDirection', sort.sortDirection);
-      if (selectedCategories.length > 0) {
-        params.append('categories', selectedCategories.join(','));
-      }
-      if (needsRevision) {
-        params.append('needsRevision', 'true')
-      }
-
-      const response = await axios.get(`/api/items?${params.toString()}`);
-      setItems(response.data.items);
-      setTotal(response.data.total);
-
+      const { items, total } = await getItems({
+        q: search,
+        limit: 100,
+        sortColumn: sort.sortColumn,
+        sortDirection: sort.sortDirection,
+        categories: selectedCategories.length > 0 ? selectedCategories : undefined,
+        needsRevision: needsRevision || undefined,
+      });
+      setItems(items);
+      setTotal(total);
     } catch (error) {
       console.error('Ошибка при загрузке объявлений:', error);
     } finally {

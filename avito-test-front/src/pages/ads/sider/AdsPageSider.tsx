@@ -1,6 +1,6 @@
 import type { JSX } from "react";
 import { Switch } from 'antd';
-import { formatCategory } from "../../../utils/category";
+import { formatCategory } from "../../../shared/lib/category";
 import './AdsPageSider.css';
 
 interface AdsPageSiderProps {

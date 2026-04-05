@@ -2,11 +2,11 @@ import { type JSX } from 'react';
 import { Button, Typography } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 
-import { formatMoney } from '../../../utils/money';
+import { formatMoney } from '../../../shared/lib/money';
 import './ProductPageHeader.css';
-import { formatDate } from '../../../utils/formatDate';
+import { formatDate } from '../../../shared/lib/formatDate';
 import { useNavigate, useParams } from 'react-router';
-import { PATHS } from '../../../types/constants';
+import { PATHS } from '../../../app/router';
 
 const { Title, Text } = Typography;
 
