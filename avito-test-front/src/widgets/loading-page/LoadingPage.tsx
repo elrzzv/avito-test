@@ -1,4 +1,5 @@
 import type { JSX } from "react";
+import './LoadingPage.css'
 
 export default function LoadingPage(): JSX.Element {
   return (
