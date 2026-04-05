@@ -50,7 +50,7 @@ function EditForm({ formData, onUpdate, onCancel, onSave, isSaving }: EditFormPr
       <div className="forms-wrapper">
         <div className="forms-column">
           <ProductInfoFields />
-          <PriceFieldWithAI />
+          <PriceFieldWithAI formData={formData} />
           <CharacteristicsSection category={formData.category} />
         </div>
       </div>

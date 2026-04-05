@@ -6,6 +6,7 @@ import { Item } from 'src/types.ts';
 import { ItemsGetInQuerySchema, ItemUpdateInSchema } from 'src/validation.ts';
 import { treeifyError, ZodError } from 'zod';
 import { doesItemNeedRevision } from './src/utils.ts';
+import { gigachatRoutes } from './routes/gigachat.js';
 
 const ITEMS = items as Item[];
 
@@ -25,6 +26,8 @@ fastify.use((_, reply, next) => {
   reply.setHeader('Access-Control-Allow-Origin', '*');
   next();
 });
+
+await fastify.register(gigachatRoutes);
 
 interface ItemGetRequest extends Fastify.RequestGenericInterface {
   Params: {
