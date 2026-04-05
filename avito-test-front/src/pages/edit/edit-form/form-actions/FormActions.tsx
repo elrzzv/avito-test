@@ -2,26 +2,25 @@ import { type JSX } from 'react';
 import { Button, Space } from 'antd';
 
 import './FormActions.css';
+import SubmitButton from './submit-button/SubmitButton';
+import type { FormInstance } from 'antd/lib/form';
 
 interface FormActionsProps {
-  onSave: () => void;
+  form: FormInstance
   onCancel: () => void;
   isSaving?: boolean;
 }
 
-function FormActions({ onSave, onCancel, isSaving = false }: FormActionsProps): JSX.Element {
+function FormActions({ form, onCancel, isSaving = false }: FormActionsProps): JSX.Element {
+
   return (
     <div className="form-actions">
       <Space size="middle">
-        <Button
-          type="primary"
-          size="large"
-          className="save-btn"
-          loading={isSaving}
-          onClick={onSave}
+        <SubmitButton
+          form={form} loading={isSaving}
         >
           Сохранить
-        </Button>
+        </SubmitButton>
 
         <Button
           size="large"

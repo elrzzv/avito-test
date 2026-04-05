@@ -82,7 +82,7 @@ function EditPage(): JSX.Element {
     const putData = async () => {
       try {
         setIsLoading(true)
-        await axios.post(`/api/items/${id}`, formData);
+        await axios.put(`/api/items/${id}`, formData);
         setFormData(formData);
         sessionStorage.setItem(`form-data-${id}`, JSON.stringify(formData));
       } catch (error) {
@@ -92,11 +92,11 @@ function EditPage(): JSX.Element {
       }
     }
 
-    //putData();
+    putData();
     console.log(formData);
     setFormData(null);
     sessionStorage.removeItem(`form-data-${id}`);
-    navigate(`/api/${id}`)
+    navigate(`/ads/${id}`)
   }, [id, navigate, formData]);
 
   if (isLoading) {
@@ -115,6 +115,7 @@ function EditPage(): JSX.Element {
           <EditForm
             formData={formData} onUpdate={updateField}
             onCancel={cancelChanges} onSave={saveData}
+            isSaving={isLoading}
           />
         </div>
       </div>

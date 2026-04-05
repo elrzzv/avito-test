@@ -13,18 +13,28 @@ interface EditFormProps {
   onUpdate: <K extends keyof Item>(field: K, value: Item[K]) => void;
   onCancel: () => void;
   onSave: () => void;
+  isSaving: boolean;
 }
 
-function EditForm({ formData, onUpdate, onCancel, onSave }: EditFormProps): JSX.Element {
+function EditForm({ formData, onUpdate, onCancel, onSave, isSaving }: EditFormProps): JSX.Element {
   const [form] = Form.useForm();
 
   useEffect(() => {
-    form.setFieldsValue(formData);
+    form.setFieldsValue({
+      ...formData,
+      params: formData.params,
+    });
   }, [formData, form]);
 
   const handleValuesChange = (changedValues: Partial<Item>) => {
     Object.entries(changedValues).forEach(([field, value]) => {
-      onUpdate(field as keyof Item, value as Item[keyof Item]);
+      if (field === 'params') {
+        Object.entries(value as object).forEach(([paramField, paramValue]) => {
+          onUpdate('params', { ...formData.params, [paramField]: paramValue });
+        });
+      } else {
+        onUpdate(field as keyof Item, value);
+      }
     });
   };
 
@@ -35,6 +45,7 @@ function EditForm({ formData, onUpdate, onCancel, onSave }: EditFormProps): JSX.
       initialValues={formData}
       className="edit-page-form"
       onValuesChange={handleValuesChange}
+      onFinish={onSave}
     >
       <div className="forms-wrapper">
         <div className="forms-column">
@@ -45,7 +56,11 @@ function EditForm({ formData, onUpdate, onCancel, onSave }: EditFormProps): JSX.
       </div>
 
       <DescriptionSection />
-      <FormActions onSave={onSave} onCancel={onCancel} />
+      <FormActions
+        form={form}
+        onCancel={onCancel}
+        isSaving={isSaving}
+      />
     </Form>
   );
 }
