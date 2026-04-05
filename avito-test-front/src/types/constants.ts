@@ -52,21 +52,21 @@ export const DEFAULT_PARAMS_VALUES = {
     brand: '',
     model: '',
     yearOfManufacture: null,
-    transmission: '', //литералы
+    transmission: undefined, //литералы
     mileage: null,
     enginePower: null
   },
   real_estate: {
-    type: '', //литерлы
+    type: undefined, //литерлы
     address: '',
     area: null,
     floor: null
   },
   electronics: {
-    type: '', //литералы
+    type: undefined, //литералы
     brand: '',
     model: '',
-    condition: '', //литералы 
+    condition: undefined, //литералы 
     color: ''
   }
 } as const;

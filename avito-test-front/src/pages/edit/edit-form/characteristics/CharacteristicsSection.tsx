@@ -41,7 +41,16 @@ function CharacteristicsSection({ category }: CharacteristicsSectionProps): JSX.
       }));
 
       return (
-        <Form.Item key={index} label={label} name={['params', paramName]}>
+        <Form.Item
+          key={index}
+          label={label}
+          name={['params', paramName]}
+          rules={
+            paramName === "type"
+              ? [{ required: true, message: 'Выберите категорию' }]
+              : []
+          }
+        >
           <Select
             className="edit-page-select"
             placeholder={`Выберите ${label.toLowerCase()}`}
