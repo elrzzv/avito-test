@@ -6,6 +6,7 @@ import './DescriptionSection.css';
 
 const { TextArea } = Input;
 
+
 function DescriptionSection(): JSX.Element {
   const handleImproveDescription = () => {
     console.log('Улучшение описания...');

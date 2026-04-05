@@ -1,49 +1,51 @@
-import { type JSX } from 'react';
+import { useEffect, type JSX } from 'react';
 import { Form } from 'antd';
-import { type EditPageProps } from '../EditPage';
-import ProductInfoFields from '../product-info-fields/ProductInfoFields';
-import PriceFieldWithAI from '../price-field-ai/PriceFieldWithAI';
-import CharacteristicsSection from '../characteristics/CharacteristicsSection';
-import DescriptionSection from '../description/DescriptionSection';
-import FormActions from '../form-actions/FormActions';
+import ProductInfoFields from './product-info-fields/ProductInfoFields';
+import PriceFieldWithAI from './price-field-ai/PriceFieldWithAI';
+import CharacteristicsSection from './characteristics/CharacteristicsSection';
+import DescriptionSection from './description/DescriptionSection';
+import FormActions from './form-actions/FormActions';
 import './EditForm.css';
+import type { Item } from '../../../types/types';
 
 interface EditFormProps {
-  initialValues?: EditPageProps['initialValues'];
+  formData: Item;
+  onUpdate: <K extends keyof Item>(field: K, value: Item[K]) => void;
+  onCancel: () => void;
+  onSave: () => void;
 }
 
-function EditForm({ initialValues }: EditFormProps): JSX.Element {
+function EditForm({ formData, onUpdate, onCancel, onSave }: EditFormProps): JSX.Element {
   const [form] = Form.useForm();
 
-  const handleSave = () => {
-    form.validateFields().then(values => {
-      console.log('Saved:', values);
-      // здесь будет логика сохранения
-    });
-  };
+  useEffect(() => {
+    form.setFieldsValue(formData);
+  }, [formData, form]);
 
-  const handleCancel = () => {
-    form.resetFields();
-    // здесь будет логика отмены/навигации
+  const handleValuesChange = (changedValues: Partial<Item>) => {
+    Object.entries(changedValues).forEach(([field, value]) => {
+      onUpdate(field as keyof Item, value as Item[keyof Item]);
+    });
   };
 
   return (
     <Form
       form={form}
       layout="vertical"
-      initialValues={initialValues}
+      initialValues={formData}
       className="edit-page-form"
+      onValuesChange={handleValuesChange}
     >
       <div className="forms-wrapper">
         <div className="forms-column">
           <ProductInfoFields />
           <PriceFieldWithAI />
-          <CharacteristicsSection />
+          <CharacteristicsSection category={formData.category} />
         </div>
       </div>
 
       <DescriptionSection />
-      <FormActions onSave={handleSave} onCancel={handleCancel} />
+      <FormActions onSave={onSave} onCancel={onCancel} />
     </Form>
   );
 }

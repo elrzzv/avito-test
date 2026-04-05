@@ -22,7 +22,12 @@ function FormActions({ onSave, onCancel, isSaving = false }: FormActionsProps): 
         >
           Сохранить
         </Button>
-        <Button size="large" className="cancel-btn" onClick={onCancel}>
+
+        <Button
+          size="large"
+          className="cancel-btn"
+          onClick={onCancel}
+        >
           Отменить
         </Button>
       </Space>

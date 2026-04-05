@@ -2,9 +2,7 @@ import { type JSX } from 'react';
 import { Typography, Alert } from 'antd';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { type Item } from '../../../../types/types';
-import {
-  PARAM_NAME, ALL_PARAMS_FIELDS, TRANSLATIONS
-} from '../../../../types/constants';
+import { ALL_PARAMS_FIELDS, TRANSLATIONS } from '../../../../types/constants';
 import './ProductDetails.css';
 
 const { Title, Text } = Typography;
@@ -23,7 +21,7 @@ function ProductDetails({ category, params }: ProductDetailsProps): JSX.Element 
     .filter((field) => !(field in params));
 
   const formatParam = (name: string) => {
-    return PARAM_NAME[name as keyof typeof PARAM_NAME] ?? 'unknown';
+    return TRANSLATIONS[name as keyof typeof TRANSLATIONS] ?? 'unknown';
   }
 
   const formatParamValue = (value: string) => {

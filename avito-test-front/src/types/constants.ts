@@ -9,7 +9,8 @@ export const PATHS = {
   NotFound: '*'
 } as const
 
-export const PARAM_NAME = {
+export const TRANSLATIONS = {
+  // общие 
   brand: 'Бренд',
   model: 'Модель',
   yearOfManufacture: 'Год производства',
@@ -21,10 +22,8 @@ export const PARAM_NAME = {
   area: 'Площадь',
   floor: 'Этаж',
   condition: 'Состояние',
-  color: 'Цвет'
-} as const
+  color: 'Цвет',
 
-export const TRANSLATIONS = {
   // для electronics
   phone: 'Телефон',
   laptop: 'Ноутбук',
@@ -46,4 +45,28 @@ export const ALL_PARAMS_FIELDS = {
   auto: ['brand', 'model', 'yearOfManufacture', 'transmission', 'mileage', 'enginePower'] as const,
   real_estate: ['type', 'address', 'area', 'floor'] as const,
   electronics: ['type', 'brand', 'model', 'condition', 'color'] as const
+} as const;
+
+export const DEFAULT_PARAMS_VALUES = {
+  auto: {
+    brand: '',
+    model: '',
+    yearOfManufacture: null,
+    transmission: '', //литералы
+    mileage: null,
+    enginePower: null
+  },
+  real_estate: {
+    type: '', //литерлы
+    address: '',
+    area: null,
+    floor: null
+  },
+  electronics: {
+    type: '', //литералы
+    brand: '',
+    model: '',
+    condition: '', //литералы 
+    color: ''
+  }
 } as const;

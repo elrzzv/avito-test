@@ -3,7 +3,9 @@ import { Form, Input, Button } from 'antd';
 import { CloseCircleFilled, BulbOutlined } from '@ant-design/icons';
 import './PriceFieldWithAI.css';
 
+
 function PriceFieldWithAI(): JSX.Element {
+
   const handleMarketPrice = () => {
     console.log('Получение рыночной стоимости...');
     // здесь будет запрос к AI/API

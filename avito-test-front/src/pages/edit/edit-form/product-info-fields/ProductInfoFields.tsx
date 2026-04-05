@@ -1,19 +1,27 @@
 import { type JSX } from 'react';
 import { Form, Input, Select } from 'antd';
 import { CloseCircleFilled } from '@ant-design/icons';
+
 import './ProductInfoFields.css'
 
+
 function ProductInfoFields(): JSX.Element {
+
   return (
     <>
-      <Form.Item label="Категория" name="category">
+      <Form.Item
+        label="Категория"
+        name="category"
+        rules={[{ required: true, message: 'Выберите категорию' }]}
+        className="required-field"
+      >
         <Select
           className="edit-page-select"
-          placeholder="Выберите категорию"
+          placeholder="Выберите категорию товара"
           options={[
+            { value: 'auto', label: 'Авто' },
+            { value: 'real_estate', label: 'Недвижимость' },
             { value: 'electronics', label: 'Электроника' },
-            { value: 'clothing', label: 'Одежда' },
-            { value: 'furniture', label: 'Мебель' },
           ]}
         />
       </Form.Item>

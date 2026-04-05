@@ -5,6 +5,8 @@ import { EditOutlined } from '@ant-design/icons';
 import { formatMoney } from '../../../utils/money';
 import './ProductPageHeader.css';
 import { formatDate } from '../../../utils/formatDate';
+import { useNavigate, useParams } from 'react-router';
+import { PATHS } from '../../../types/constants';
 
 const { Title, Text } = Typography;
 
@@ -13,12 +15,17 @@ interface ProductPageHeaderProps {
   price: number | null;
   createdAt: string;
   updatedAt: string;
-  onEdit: () => void;
 }
 
 function ProductPageHeader({ title, price,
-  createdAt, updatedAt, onEdit }: ProductPageHeaderProps): JSX.Element {
+  createdAt, updatedAt }: ProductPageHeaderProps): JSX.Element {
+  
+  const navigate = useNavigate();
+  const {id} = useParams();
 
+  const handleEdit = () => {
+    navigate(`${PATHS.Ads}/${id}/edit`);
+  }
   return (
     <div className="product-header">
       <div className="header-left">
@@ -28,7 +35,7 @@ function ProductPageHeader({ title, price,
         <Button
           type="primary"
           icon={<EditOutlined />}
-          onClick={onEdit}
+          onClick={handleEdit}
           className="edit-button"
         >
           Редактировать
