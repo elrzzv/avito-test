@@ -1,156 +1,106 @@
+.ai-tooltip-anchor {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Принудительно белый фон + убираем стрелку */
 .ai-price-tooltip .ant-tooltip-inner {
-  min-width: 320px;
-  max-width: 450px;
-  padding: 16px 20px;
   background: #ffffff !important;
   border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  padding: 16px 20px;
+  min-width: 280px;
 }
 
 .ai-price-tooltip .ant-tooltip-arrow {
-  display: none;
-}
-
-.ai-price-tooltip .ant-tooltip-content {
-  background: transparent;
-}
-
-.ai-price-tooltip .ai-tooltip-content.error {
-  background-color: #FEE9E7;
-  border-radius: 12px;
-  padding: 0;
-}
-
-.ai-tooltip-content.error .ai-tooltip-error-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: #C00F0C;
-  margin-bottom: 8px;
-}
-
-.ai-tooltip-content.error .ai-tooltip-error-message {
-  font-size: 13px;
-  font-weight: 400;
-  color: #1E1E1E;
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
-
-.ai-tooltip-content.error .ai-tooltip-error-hint {
-  font-size: 12px;
-  font-weight: 400;
-  color: #1E1E1E;
-  margin-bottom: 4px;
-  opacity: 0.8;
-}
-
-.ai-tooltip-error-close-btn {
-  background-color: #FCB3AD !important;
-  border-color: #FCB3AD !important;
-  color: #1E1E1E !important;
-  border-radius: 6px;
-  font-size: 14px;
-  height: 32px;
-  padding: 4px 16px;
-}
-
-.ai-tooltip-error-close-btn:hover {
-  background-color: #ffa5a0 !important;
-  border-color: #ffa5a0 !important;
-  color: #1E1E1E !important;
+  display: none !important;
 }
 
 .ai-tooltip-content {
   display: flex;
-  gap: 12px;
+  flex-direction: column;
+  padding: 2px 0;
 }
 
 .ai-tooltip-content.loading {
   align-items: center;
+  justify-content: center;
+  padding: 8px 0;
 }
 
+.ai-tooltip-content.error,
 .ai-tooltip-content.success {
-  align-items: flex-start;
+  padding: 0;
 }
 
-.ai-tooltip-spinner {
-  width: 20px;
-  height: 20px;
-  border: 2px solid #1890ff;
-  border-top-color: transparent;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  flex-shrink: 0;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.ai-tooltip-title {
+.ai-tooltip-error-title {
+  font-weight: 600;
+  color: #CF1322;
+  margin-bottom: 6px;
   font-size: 14px;
-  font-weight: 500;
-  color: #000000;
-  margin-bottom: 4px;
 }
 
-.ai-tooltip-message {
+.ai-tooltip-error-message {
+  color: #1E1E1E;
+  margin-bottom: 6px;
   font-size: 13px;
+  line-height: 1.4;
+}
+
+.ai-tooltip-error-hint {
   color: #595959;
+  margin-bottom: 8px;
+  font-size: 12px;
 }
 
 .ai-tooltip-response-label {
-  font-size: 14px;
   font-weight: 600;
-  color: #000000;
-  margin-bottom: 8px;
+  color: #000;
+  margin-bottom: 6px;
+  font-size: 14px;
 }
 
 .ai-tooltip-response-text {
-  font-size: 14px;
-  font-weight: 400;
-  color: #000000;
+  color: #333;
   line-height: 1.5;
-  margin-bottom: 4px;
-}
-
-.ai-tooltip-apply-btn {
-  background-color: #1677ff !important;
-  border-color: #1677ff !important;
-  color: #ffffff !important;
-  border-radius: 6px;
   font-size: 14px;
-  height: 32px;
-  padding: 4px 16px;
 }
 
-.ai-tooltip-apply-btn:hover {
-  background-color: #4096ff !important;
-  border-color: #4096ff !important;
-  color: #ffffff !important;
+.ai-tooltip-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
 }
 
-.ai-tooltip-close-btn {
-  background-color: #ffffff !important;
-  border-color: #d9d9d9 !important;
-  color: #000000 !important;
-  border-radius: 6px;
-  font-size: 14px;
-  height: 32px;
-  padding: 4px 16px;
+.ai-tooltip-actions .ant-btn {
+  height: 32px !important;
+  border-radius: 6px !important;
+  padding: 0 16px !important;
+  font-size: 14px !important;
+  line-height: 30px !important;
 }
 
-.ai-tooltip-close-btn:hover {
+.ai-tooltip-btn {
+  background: #fff !important;
+  border: 1px solid #d9d9d9 !important;
+  color: #000 !important;
+}
+
+.ai-tooltip-btn:hover {
   border-color: #4096ff !important;
   color: #4096ff !important;
 }
 
-.ai-price-tooltip .ant-divider-horizontal {
-  margin: 12px 0 8px 0;
+.ai-tooltip-btn-primary {
+  background: #1677ff !important;
+  border: 1px solid #1677ff !important;
+  color: #fff !important;
 }
 
-.ai-price-tooltip .ant-tooltip-arrow {
-  display: none;
+.ai-tooltip-btn-primary:hover {
+  background: #4096ff !important;
+  border-color: #4096ff !important;
 }

@@ -1,7 +1,6 @@
 import { useCallback, useState, type JSX } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import { BulbOutlined, LoadingOutlined, RedoOutlined } from '@ant-design/icons';
-
 import type { Item } from '../../../../types/types';
 import { getMarketPrice } from '../../../../services/gigachat';
 import { AIPriceTooltip } from './ai-price-tooltip/AIPriceTooltip';
@@ -11,13 +10,12 @@ interface PriceFieldWithAIProps {
   formData: Item;
 }
 
-function PriceFieldWithAI({ formData }: PriceFieldWithAIProps): JSX.Element {
+export default function PriceFieldWithAI({ formData }: PriceFieldWithAIProps): JSX.Element {
   const [loading, setLoading] = useState(false);
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const [aiPrice, setAiPrice] = useState<string | null>(null);
   const [aiFullResponse, setAiFullResponse] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-
   const form = Form.useFormInstance();
 
   const handleMarketPrice = useCallback(async () => {
@@ -26,22 +24,15 @@ function PriceFieldWithAI({ formData }: PriceFieldWithAIProps): JSX.Element {
     setError(null);
     setAiPrice(null);
     setAiFullResponse(null);
-    
     try {
-      const priceFromAI = await getMarketPrice(formData);
-      setAiPrice(priceFromAI);
-      
-      const responseText = `Средняя цена для ${formData.title} с учетом состояния - ${priceFromAI} ₽`;
-      setAiFullResponse(responseText);
-      
-      message.success(`Рыночная цена получена: ${priceFromAI} ₽`);
-      
+      const price = await getMarketPrice(formData);
+      setAiPrice(price);
+      setAiFullResponse(`Средняя цена для ${formData.title} с учетом состояния - ${price} ₽`);
+      message.success(`Рыночная цена получена: ${price} ₽`);
     } catch (err) {
-      console.error('Error getting market price:', err);
-      const errorMessage = err instanceof Error ? err.message : 'Не удалось получить рыночную стоимость. Попробуйте повторить запрос позже.';
-      setError(errorMessage);
-      message.error(errorMessage);
-      
+      const msg = err instanceof Error ? err.message : 'Не удалось получить цену';
+      setError(msg);
+      message.error(msg);
     } finally {
       setLoading(false);
     }
@@ -55,41 +46,21 @@ function PriceFieldWithAI({ formData }: PriceFieldWithAIProps): JSX.Element {
     }
   }, [aiPrice, form]);
 
-  const handleRetry = useCallback(() => {
-    handleMarketPrice();
-  }, [handleMarketPrice]);
-
-  const handleCloseTooltip = () => {
-    setTooltipVisible(false);
-  };
-
   const getButtonIcon = () => {
     if (loading) return <LoadingOutlined />;
     if (aiPrice) return <RedoOutlined />;
     return <BulbOutlined />;
   };
 
-  const getButtonText = () => {
-    if (loading) return 'Выполняется запрос...';
-    if (aiPrice) return 'Повторить запрос';
-    return 'Узнать рыночную стоимость';
-  };
-
-  const isButtonDisabled = loading;
-
   return (
-    <div className="price-wrapper">
+    <div className="price-field-wrapper">
       <Form.Item
         label="Цена"
         name="price"
         rules={[{ required: true, message: 'Введите цену' }]}
-        className="price-form-item required-field"
+        className="price-form-item"
       >
-        <Input
-          className="edit-page-input"
-          placeholder="Введите цену"
-          allowClear
-        />
+        <Input type="number" placeholder="0" />
       </Form.Item>
 
       <div className="ai-button-container">
@@ -98,11 +69,11 @@ function PriceFieldWithAI({ formData }: PriceFieldWithAIProps): JSX.Element {
           className="ai-price-btn"
           icon={getButtonIcon()}
           onClick={handleMarketPrice}
-          disabled={isButtonDisabled}
+          disabled={loading}
         >
-          {getButtonText()}
+          {loading ? 'Загрузка...' : aiPrice ? 'Повторить запрос' : 'Узнать рыночную стоимость'}
         </Button>
-        
+
         <AIPriceTooltip
           loading={loading}
           price={aiPrice}
@@ -110,13 +81,11 @@ function PriceFieldWithAI({ formData }: PriceFieldWithAIProps): JSX.Element {
           visible={tooltipVisible}
           itemTitle={formData.title}
           aiResponse={aiFullResponse || undefined}
-          onClose={handleCloseTooltip}
+          onClose={() => setTooltipVisible(false)}
           onApply={handleApplyPrice}
-          onRetry={handleRetry}
+          onRetry={handleMarketPrice}
         />
       </div>
     </div>
   );
 }
-
-export default PriceFieldWithAI;
