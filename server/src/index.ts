@@ -123,6 +123,74 @@ app.post('/api/market-price', async (req: Request<{}, {}, MarketPriceRequest>, r
   }
 });
 
+interface ImproveDescriptionRequest {
+  item: {
+    title: string;
+    category: string;
+    description?: string;
+    params?: any;
+  };
+}
+
+app.post('/api/improve-description', async (req: Request<{}, {}, ImproveDescriptionRequest>, res: Response) => {
+  try {
+    const { item } = req.body;
+
+    if (!item) {
+      return res.status(400).json({ error: 'Item data is required' });
+    }
+
+    console.log('Improving description for item:', item.title);
+
+    const token = await getGigaChatToken();
+    console.log('Token obtained');
+
+    const hasExistingDescription = item.description && item.description.trim().length > 0;
+
+    let prompt: string;
+    if (hasExistingDescription) {
+      prompt = `Улучши описание для товара. Товар: "${item.title}". Категория: "${item.category}". Текущее описание: "${item.description}". Вся информация товара: ${item}.Сделай описание более привлекательным, подробным и продающим. Сохрани все ключевые характеристики. Ответь только текстом описания, без пояснений и кавычек.`;
+    } else {
+      prompt = `Придумай привлекательное описание для товара. Товар: "${item.title}". Категория: "${item.category}". Вся информация товара: ${item}. Напиши подробное, продающее описание, которое подчеркивает преимущества товара. Ответь только текстом описания, без пояснений и кавычек.`;
+    }
+
+    const response = await fetch('https://gigachat.devices.sberbank.ru/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        model: 'GigaChat',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.7,
+        max_tokens: 800,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('GigaChat API error:', response.status, errorText);
+      throw new Error(`GigaChat API error: ${response.status}`);
+    }
+
+    const data = (await response.json()) as any;
+    const description = data.choices?.[0]?.message?.content || '';
+    console.log('Generated description length:', description.length);
+
+    if (!description) {
+      throw new Error('Empty response from GigaChat');
+    }
+
+    return res.json({ description });
+  } catch (error) {
+    console.error('Improve description error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Internal server error';
+    res.status(500).json({ error: errorMessage });
+  }
+});
+
 // Добавим тестовый эндпоинт для проверки
 app.get('/api/health', (req: Request, res: Response) => {
   res.json({ status: 'ok', message: 'Server is running' });

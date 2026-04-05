@@ -55,7 +55,7 @@ function EditForm({ formData, onUpdate, onCancel, onSave, isSaving }: EditFormPr
         </div>
       </div>
 
-      <DescriptionSection />
+      <DescriptionSection formData={formData}/>
       <FormActions
         form={form}
         onCancel={onCancel}

@@ -1,17 +1,20 @@
 import { type JSX } from 'react';
-import { Form, Input, Button } from 'antd';
-import { BulbOutlined } from '@ant-design/icons';
+import { Form, Input } from 'antd';
+import { useWatch } from 'antd/es/form/Form';
 
+import AIDescriptionButton from './ai-button/AIDescriptionButton';
+import type { Item } from '../../../../types/types';
 import './DescriptionSection.css';
 
 const { TextArea } = Input;
 
+interface DescriptionSectionProps {
+  formData: Item;
+}
 
-function DescriptionSection(): JSX.Element {
-  const handleImproveDescription = () => {
-    console.log('Улучшение описания...');
-    // здесь будет AI запрос
-  };
+function DescriptionSection({ formData }: DescriptionSectionProps): JSX.Element {
+  const form = Form.useFormInstance();
+  const currentDescription = useWatch('description', form) || '';
 
   return (
     <div className="description-section">
@@ -27,14 +30,10 @@ function DescriptionSection(): JSX.Element {
         />
       </Form.Item>
 
-      <Button
-        type="text"
-        icon={<BulbOutlined />}
-        className="generate-description-btn"
-        onClick={handleImproveDescription}
-      >
-        Улучшить описание
-      </Button>
+      <AIDescriptionButton
+        formData={formData}
+        currentDescription={currentDescription}
+      />
     </div>
   );
 }

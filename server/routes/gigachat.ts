@@ -93,7 +93,7 @@ export async function gigachatRoutes(fastify: FastifyInstance) {
       console.log('Token obtained');
 
       // Формируем промпт
-      const prompt = `Оцени рыночную стоимость для товара: "${item}". Ответь только числом в рублях, без пояснений.`;
+      const prompt = `Оцени рыночную стоимость для товара: "${item.title}". Категория: "${item.category}". Полное описание: ${item} Ответь только числом в рублях, без пояснений.`;
 
       const response = await fetch('https://gigachat.devices.sberbank.ru/api/v1/chat/completions', {
         method: 'POST',
@@ -135,6 +135,89 @@ export async function gigachatRoutes(fastify: FastifyInstance) {
       throw new Error('Could not extract price from response');
     } catch (error) {
       console.error('Error:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Internal server error';
+      return reply.status(500).send({ error: errorMessage });
+    }
+  });
+
+  fastify.post('/improve-description', async (request, reply) => {
+    try {
+      const { item } = request.body as { item: any };
+      
+      if (!item) {
+        return reply.status(400).send({ error: 'Item data is required' });
+      }
+
+      console.log('\n=== Improving description for ===');
+      console.log('Title:', item.title);
+      console.log('Category:', item.category);
+      console.log('Has existing description:', !!item.description);
+      
+      const token = await getGigaChatToken();
+      console.log('Token obtained');
+
+      const hasExistingDescription = item.description && item.description.trim().length > 0;
+
+      let prompt: string;
+      if (hasExistingDescription) {
+        prompt = `Улучши описание для товара. 
+Товар: "${item.title}"
+Категория: "${item.category}"
+Текущее описание: "${item.description}"
+Вся информация по товару: "${item}"
+
+Сделай описание более привлекательным, подробным и продающим. Сохрани все ключевые характеристики. 
+Ответь только текстом описания, без пояснений и кавычек.`;
+      } else {
+        prompt = `Придумай привлекательное описание для товара. 
+Товар: "${item.title}"
+Категория: "${item.category}"
+Вся информация по товару: "${item}"
+
+Напиши подробное, продающее описание, которое подчеркивает преимущества товара. 
+Ответь только текстом описания, без пояснений и кавычек.`;
+      }
+
+      console.log('Prompt length:', prompt.length);
+
+      const response = await fetch('https://gigachat.devices.sberbank.ru/api/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          model: 'GigaChat',
+          messages: [
+            {
+              role: 'user',
+              content: prompt,
+            },
+          ],
+          temperature: 0.7,
+          max_tokens: 800,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('GigaChat API error:', response.status, errorText);
+        throw new Error(`API error: ${response.status} - ${errorText}`);
+      }
+
+      const data = await response.json() as any;
+      const description = data.choices?.[0]?.message?.content || '';
+      console.log('Generated description length:', description.length);
+      console.log('Generated description preview:', description.substring(0, 200));
+
+      if (!description) {
+        throw new Error('Empty response from GigaChat');
+      }
+
+      return reply.send({ description });
+    } catch (error) {
+      console.error('Improve description error:', error);
       const errorMessage = error instanceof Error ? error.message : 'Internal server error';
       return reply.status(500).send({ error: errorMessage });
     }

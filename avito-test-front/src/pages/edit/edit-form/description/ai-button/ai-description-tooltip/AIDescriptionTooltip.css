@@ -1,0 +1,116 @@
+.ai-description-tooltip-anchor {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.ai-description-price-tooltip .ant-tooltip-inner {
+  background: #ffffff !important;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  padding: 16px 20px;
+  min-width: 320px;
+  max-width: 450px;
+}
+
+.ai-description-price-tooltip .ant-tooltip-arrow {
+  display: none !important;
+}
+
+.ai-description-tooltip-content {
+  display: flex;
+  flex-direction: column;
+  padding: 2px 0;
+}
+
+.ai-description-tooltip-content.loading {
+  align-items: center;
+  justify-content: center;
+  padding: 16px 0;
+  gap: 12px;
+}
+
+.ai-description-tooltip-loading-text {
+  color: #666;
+  font-size: 13px;
+}
+
+.ai-description-tooltip-content.error,
+.ai-description-tooltip-content.success {
+  padding: 0;
+}
+
+.ai-description-tooltip-error-title {
+  font-weight: 600;
+  color: #cf1322;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.ai-description-tooltip-error-message {
+  color: #1e1e1e;
+  margin-bottom: 6px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.ai-description-tooltip-error-hint {
+  color: #595959;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.ai-description-tooltip-response-label {
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.ai-description-tooltip-response-text {
+  color: #333;
+  line-height: 1.5;
+  font-size: 14px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.ai-description-tooltip-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.ai-description-tooltip-actions .ant-btn {
+  height: 32px !important;
+  border-radius: 6px !important;
+  padding: 0 16px !important;
+  font-size: 14px !important;
+  line-height: 30px !important;
+}
+
+.ai-description-tooltip-btn {
+  background: #fff !important;
+  border: 1px solid #d9d9d9 !important;
+  color: #000 !important;
+}
+
+.ai-description-tooltip-btn:hover {
+  border-color: #4096ff !important;
+  color: #4096ff !important;
+}
+
+.ai-description-tooltip-btn-primary {
+  background: #1677ff !important;
+  border: 1px solid #1677ff !important;
+  color: #fff !important;
+}
+
+.ai-description-tooltip-btn-primary:hover {
+  background: #4096ff !important;
+  border-color: #4096ff !important;
+}

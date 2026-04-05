@@ -22,3 +22,36 @@ export async function getMarketPrice(item: Item): Promise<string> {
     throw error;
   }
 }
+
+export async function improveDescription(
+  item: Item,
+  currentDescription?: string
+): Promise<string> {
+  try {
+    const response = await fetch('/api/improve-description', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        item: {
+          title: item.title,
+          category: item.category,
+          description: currentDescription || '',
+          params: item.params,
+        },
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to improve description');
+    }
+
+    const data = await response.json();
+    return data.description;
+  } catch (error) {
+    console.error('Improve description error:', error);
+    throw error;
+  }
+}
