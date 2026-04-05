@@ -31,16 +31,6 @@
   box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
 }
 
-.clear-icon {
-  color: #bfbfbf;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.clear-icon:hover {
-  color: #ff4d4f;
-}
-
 .ant-form-item-has-error .edit-page-input,
 .ant-form-item-has-error .edit-page-select {
   border-color: #ff4d4f;

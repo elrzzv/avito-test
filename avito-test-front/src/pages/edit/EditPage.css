@@ -52,6 +52,10 @@ body::-webkit-scrollbar {
   text-align: left;
 }
 
+.edit-page-form .ant-form-item-explain-error {
+  text-align: left;
+}
+
 @media (max-width: 768px) {
   .edit-page-container {
     padding: 16px;

@@ -1,6 +1,5 @@
 import { type JSX } from 'react';
 import { Form, Input, Select } from 'antd';
-import { CloseCircleFilled } from '@ant-design/icons';
 
 import './ProductInfoFields.css'
 
@@ -35,7 +34,7 @@ function ProductInfoFields(): JSX.Element {
         <Input
           className="edit-page-input"
           placeholder="Введите название товара"
-          suffix={<CloseCircleFilled className="clear-icon" />}
+          allowClear
         />
       </Form.Item>
     </>

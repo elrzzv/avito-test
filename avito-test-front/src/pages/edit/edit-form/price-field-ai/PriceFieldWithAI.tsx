@@ -1,6 +1,6 @@
 import { type JSX } from 'react';
 import { Form, Input, Button } from 'antd';
-import { CloseCircleFilled, BulbOutlined } from '@ant-design/icons';
+import { BulbOutlined } from '@ant-design/icons';
 import './PriceFieldWithAI.css';
 
 
@@ -22,7 +22,7 @@ function PriceFieldWithAI(): JSX.Element {
         <Input
           className="edit-page-input"
           placeholder="Введите цену"
-          suffix={<CloseCircleFilled className="clear-icon" />}
+          allowClear
         />
       </Form.Item>
 

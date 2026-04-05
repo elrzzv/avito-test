@@ -1,6 +1,5 @@
 import { type JSX } from 'react';
 import { Form, Input, Select } from 'antd';
-import { CloseCircleFilled } from '@ant-design/icons';
 
 import { type Item } from '../../../../types/types';
 import { ALL_PARAMS_FIELDS, TRANSLATIONS } from '../../../../types/constants';
@@ -47,7 +46,7 @@ function CharacteristicsSection({ category }: CharacteristicsSectionProps): JSX.
           name={['params', paramName]}
           rules={
             paramName === "type"
-              ? [{ required: true, message: 'Выберите категорию' }]
+              ? [{ required: true, message: 'Выберите тип товара' }]
               : []
           }
         >
@@ -55,6 +54,7 @@ function CharacteristicsSection({ category }: CharacteristicsSectionProps): JSX.
             className="edit-page-select"
             placeholder={`Выберите ${label.toLowerCase()}`}
             options={options}
+            allowClear
           />
         </Form.Item>
       );
@@ -65,7 +65,7 @@ function CharacteristicsSection({ category }: CharacteristicsSectionProps): JSX.
         <Input
           className="edit-page-input"
           placeholder={`Введите ${label.toLowerCase()}`}
-          suffix={<CloseCircleFilled className="clear-icon" />}
+          allowClear
         />
       </Form.Item>
     );
