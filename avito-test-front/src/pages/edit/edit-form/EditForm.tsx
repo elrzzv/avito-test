@@ -38,6 +38,14 @@ function EditForm({ formData, onUpdate, onCancel, onSave, isSaving }: EditFormPr
     });
   };
 
+  const handlePriceChange = (price: number) => {
+    onUpdate('price', price);
+  };
+
+  const handleDescriptionChange = (description: string) => {
+    onUpdate('description', description);
+  };
+
   return (
     <Form
       form={form}
@@ -50,12 +58,18 @@ function EditForm({ formData, onUpdate, onCancel, onSave, isSaving }: EditFormPr
       <div className="forms-wrapper">
         <div className="forms-column">
           <ProductInfoFields />
-          <PriceFieldWithAI formData={formData} />
+          <PriceFieldWithAI 
+            formData={formData} 
+            onPriceChange={handlePriceChange}
+          />
           <CharacteristicsSection category={formData.category} />
         </div>
       </div>
 
-      <DescriptionSection formData={formData}/>
+      <DescriptionSection 
+        formData={formData} 
+        onDescriptionChange={handleDescriptionChange}
+      />
       <FormActions
         form={form}
         onCancel={onCancel}

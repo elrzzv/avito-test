@@ -9,9 +9,14 @@ import './AIDescriptionButton.css';
 interface AIDescriptionButtonProps {
   formData: Item;
   currentDescription: string;
+  onDescriptionChange?: (description: string) => void;
 }
 
-export default function AIDescriptionButton({ formData, currentDescription }: AIDescriptionButtonProps): JSX.Element {
+export default function AIDescriptionButton({ 
+  formData, 
+  currentDescription,
+  onDescriptionChange 
+}: AIDescriptionButtonProps): JSX.Element {
   const [loading, setLoading] = useState(false);
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const [aiDescription, setAiDescription] = useState<string | null>(null);
@@ -45,10 +50,17 @@ export default function AIDescriptionButton({ formData, currentDescription }: AI
   const handleApplyDescription = useCallback(() => {
     if (aiDescription && form) {
       form.setFieldValue('description', aiDescription);
+      
+      form.setFields([{ name: 'description', value: aiDescription, touched: true }]);
+      
+      if (onDescriptionChange) {
+        onDescriptionChange(aiDescription);
+      }
+      
       message.success('Описание применено');
       setTooltipVisible(false);
     }
-  }, [aiDescription, form]);
+  }, [aiDescription, form, onDescriptionChange]);
 
   const getButtonText = () => {
     if (loading) return 'Выполняется запрос';
@@ -79,7 +91,6 @@ export default function AIDescriptionButton({ formData, currentDescription }: AI
         description={aiDescription}
         error={error}
         visible={tooltipVisible}
-        itemTitle={formData.title}
         aiResponse={aiFullResponse || undefined}
         onClose={() => setTooltipVisible(false)}
         onApply={handleApplyDescription}

@@ -93,7 +93,6 @@ function EditPage(): JSX.Element {
     }
 
     putData();
-    console.log(formData);
     setFormData(null);
     sessionStorage.removeItem(`form-data-${id}`);
     navigate(`/ads/${id}`)

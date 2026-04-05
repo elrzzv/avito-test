@@ -10,9 +10,10 @@ const { TextArea } = Input;
 
 interface DescriptionSectionProps {
   formData: Item;
+  onDescriptionChange?: (description: string) => void;
 }
 
-function DescriptionSection({ formData }: DescriptionSectionProps): JSX.Element {
+function DescriptionSection({ formData, onDescriptionChange }: DescriptionSectionProps): JSX.Element {
   const form = Form.useFormInstance();
   const currentDescription = useWatch('description', form) || '';
 
@@ -33,6 +34,7 @@ function DescriptionSection({ formData }: DescriptionSectionProps): JSX.Element 
       <AIDescriptionButton
         formData={formData}
         currentDescription={currentDescription}
+        onDescriptionChange={onDescriptionChange}
       />
     </div>
   );

@@ -8,9 +8,10 @@ import './PriceFieldWithAI.css';
 
 interface PriceFieldWithAIProps {
   formData: Item;
+  onPriceChange?: (price: number) => void;
 }
 
-export default function PriceFieldWithAI({ formData }: PriceFieldWithAIProps): JSX.Element {
+export default function PriceFieldWithAI({ formData, onPriceChange }: PriceFieldWithAIProps): JSX.Element {
   const [loading, setLoading] = useState(false);
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const [aiPrice, setAiPrice] = useState<string | null>(null);
@@ -40,11 +41,20 @@ export default function PriceFieldWithAI({ formData }: PriceFieldWithAIProps): J
 
   const handleApplyPrice = useCallback(() => {
     if (aiPrice && form) {
-      form.setFieldValue('price', Number(aiPrice));
+      const numericPrice = Number(aiPrice);
+      
+      form.setFieldValue('price', numericPrice);
+      
+      form.setFields([{ name: 'price', value: numericPrice, touched: true }]);
+      
+      if (onPriceChange) {
+        onPriceChange(numericPrice);
+      }
+      
       message.success(`Цена ${aiPrice} ₽ применена`);
       setTooltipVisible(false);
     }
-  }, [aiPrice, form]);
+  }, [aiPrice, form, onPriceChange]);
 
   const getButtonIcon = () => {
     if (loading) return <LoadingOutlined />;
